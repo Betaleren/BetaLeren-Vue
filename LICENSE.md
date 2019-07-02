@@ -1,2 +1,2 @@
 
-Copyright (C) 2019 pascal
+Copyright (C) 2019 BetaLeren-Vue
