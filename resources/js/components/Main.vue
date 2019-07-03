@@ -13,12 +13,11 @@
 </template>
 
 <script>
+
+
     export default {
         mounted() {
             console.log('Component mounted.');
-            $(document).ready(function(){
-                $("test").remove();
-            });
         }
     }
 </script>
