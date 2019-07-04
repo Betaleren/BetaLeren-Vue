@@ -1880,8 +1880,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Dashboard"
+  name: "Dashboard",
+  data: function data() {
+    return {
+      tests: [{
+        id: '1'
+      }, {
+        id: '2'
+      }, {
+        id: '3'
+      }, {
+        id: '4'
+      }, {
+        id: '5'
+      }, {
+        id: '6'
+      }, {
+        id: '7'
+      }, {
+        id: '8'
+      }, {
+        id: '9'
+      }, {
+        id: '10'
+      }, {
+        id: '11'
+      }]
+    };
+  }
 });
 
 /***/ }),
@@ -37378,7 +37420,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "row justify-content-center" },
+    _vm._l(_vm.tests, function(test) {
+      return _c(
+        "div",
+        {
+          key: test.id,
+          staticClass: "p-1",
+          staticStyle: { "min-width": "210px", "max-width": "210px" }
+        },
+        [
+          _vm._m(0, true),
+          _vm._v(" "),
+          _c("div", {
+            staticClass: "dropdown-divider border-dark",
+            staticStyle: { width: "calc(100% + .5rem)" }
+          })
+        ]
+      )
+    }),
+    0
+  )
 }
 var staticRenderFns = [
   function() {
@@ -37386,7 +37450,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [_c("h1", [_vm._v("lol")])])
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "d-flex flex-column" }, [
+          _c("div", {}, [_c("img", { attrs: { src: "", alt: "" } })]),
+          _vm._v(" "),
+          _c("div", {}, [
+            _vm._v("\n                        lol\n                    ")
+          ]),
+          _vm._v(" "),
+          _c("div", {}, [
+            _vm._v("\n                        lol\n                    ")
+          ])
+        ])
+      ])
     ])
   }
 ]
