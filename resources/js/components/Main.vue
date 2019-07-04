@@ -1,7 +1,7 @@
 <template>
     <fragment>
         <header>
-
+            <nav-bar></nav-bar>
         </header>
         <main>
             <router-view></router-view>
@@ -13,11 +13,12 @@
 </template>
 
 <script>
-
+    import NavBar from './nav-bars/Nav-Bar';
 
     export default {
-        mounted() {
-            console.log('Component mounted.');
-        }
+        components: {
+            NavBar,
+        },
+        name: "Main"
     }
 </script>

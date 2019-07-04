@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('Main');
 });
+
+Route::get('/settings', function () {
+    return view('Main');
+});
