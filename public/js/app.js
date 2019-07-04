@@ -1878,6 +1878,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard"
 });
@@ -37344,7 +37346,12 @@ var render = function() {
   return _c("fragment", [
     _c("header", [_c("nav-bar")], 1),
     _vm._v(" "),
-    _c("main", [_c("router-view")], 1),
+    _c(
+      "main",
+      { staticClass: "mt-7 w-lg-75 mx-lg-auto mx--lg-3" },
+      [_c("router-view")],
+      1
+    ),
     _vm._v(" "),
     _c("footer")
   ])
@@ -37378,7 +37385,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("working")])])
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-body" }, [_c("h1", [_vm._v("lol")])])
+    ])
   }
 ]
 render._withStripped = true
@@ -37608,8 +37617,11 @@ var render = function() {
     [
       _c(
         "router-link",
-        { staticClass: "nav-link text-dark active", attrs: { to: "" } },
-        [_c("i", { staticClass: "fas fa-tasks px-2" }), _vm._v("Progress")]
+        {
+          staticClass: "nav-link text-dark active",
+          attrs: { to: "/profile?test=7" }
+        },
+        [_c("i", { staticClass: "fas fa-user px-2" }), _vm._v("Profile")]
       ),
       _vm._v(" "),
       _c(
@@ -53047,8 +53059,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\development\web\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\development\web\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Web-Development\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Web-Development\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
