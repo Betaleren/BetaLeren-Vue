@@ -18,3 +18,8 @@ Route::get('/', function () {
 Route::get('/settings', function () {
     return view('Main');
 });
+
+Route::get('/login', function (){
+    return view('main');
+});
+

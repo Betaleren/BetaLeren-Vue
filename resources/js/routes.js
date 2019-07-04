@@ -10,6 +10,7 @@ Vue.use(VueRouter);
 */
 import dashboard from '../js/components/general/Dashboard';
 import settings from '../js/components/settings/Settings';
+import login from '../js/components/general/login';
 
 const router = new VueRouter({
     mode: 'history',
@@ -18,6 +19,11 @@ const router = new VueRouter({
             path: '/',
             name: dashboard,
             component: dashboard
+        },
+        {
+            path: '/login',
+            name: login,
+            component: login
         },
         {
             path: '/settings',
