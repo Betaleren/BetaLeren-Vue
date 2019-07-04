@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('Main');
 });
+
+Route::get('/profile', function () {
+    return view('main');
+});
+

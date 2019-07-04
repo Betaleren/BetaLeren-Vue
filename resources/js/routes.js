@@ -9,6 +9,7 @@ Vue.use(VueRouter);
     pages
 */
 import dashboard from '../js/components/general/Dashboard'
+import profile from '../js/components/general/Profile'
 
 const router = new VueRouter({
     mode: 'history',
@@ -17,6 +18,11 @@ const router = new VueRouter({
             path: '/',
             name: dashboard,
             component: dashboard
+        },
+        {
+            path: "/profile",
+            name: profile,
+            component: profile,
         },
     ]
 });
