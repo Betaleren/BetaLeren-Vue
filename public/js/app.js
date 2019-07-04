@@ -1913,12 +1913,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Profile",
   data: function data() {
     return {
       user: [],
+      courses: [],
       data: this.$route.query.test
     };
   },
@@ -37411,28 +37440,98 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("fragment", [
-    _c("div", { staticClass: "col-md-8 mt-4" }, [
-      _c("div", { staticClass: "card  card-default" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v(" User list")]),
+  return _c(
+    "fragment",
+    _vm._l(_vm.user, function(u) {
+      return _c("div", { key: u.id }, [
+        _c("div", { staticClass: "center text-center mb-5" }, [
+          _c("div", { staticClass: "caption" }, [
+            _c("h1", { staticClass: "title display-3" }, [
+              _vm._v(_vm._s(u.firstname + " " + u.lastname))
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "card-body" },
-          _vm._l(_vm.user, function(u) {
-            return _c("ul", [
+          { staticClass: "card mx-auto", staticStyle: { width: "18rem" } },
+          [
+            _c("img", {
+              staticClass: "card-img-top",
+              attrs: {
+                src: "img/Profile/default-avatar.png",
+                alt: "Card image cap"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("h5", { staticClass: "card-title font-weight-bold" }, [
+                _vm._v("Bio:")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v("{!! $user->bio !!}")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "list-group list-group-flush" }, [
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v("Total videos watched: {!! $total_post !!}")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-group-item" }, [
+                _vm._v("Total exams completed: {!! $joined[0] !!}")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "center text-center mb-5" }, [
+          _c("div", { staticClass: "caption" }, [
+            _c("h3", { staticClass: "title display-4 " }, [
               _vm._v(
-                "\n                        " +
-                  _vm._s(u.firstname) +
-                  "\n                "
+                _vm._s(u.firstname + " " + u.lastname) + " Joined courses:"
               )
             ])
-          }),
-          0
-        )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticStyle: { width: "50px" } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card mb-3 text-center  bg-light" }, [
+          _c("div", {}, [
+            _c("div", {}, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h4", { staticClass: "card-title" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-primary",
+                      staticStyle: {
+                        cursor: "pointer",
+                        "text-decoration": "none"
+                      },
+                      attrs: { href: "topic?topic_id={!! $topic->id !!}" }
+                    },
+                    [_vm._v("{!! $topic->name !!}")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("hr", { staticStyle: { "max-width": "80%" } }),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v("{!! $topic->description !!}")
+                ])
+              ])
+            ])
+          ])
+        ])
       ])
-    ])
-  ])
+    }),
+    0
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53059,8 +53158,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Web-Development\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Web-Development\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\development\web\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\development\web\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
