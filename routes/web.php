@@ -18,3 +18,12 @@ Route::get('/', function () {
 Route::get('/settings', function () {
     return view('Main');
 });
+
+Route::get('/profile', function () {
+    return view('main');
+});
+
+
+Route::get('/settings', function () {
+    return view('Main');
+});
