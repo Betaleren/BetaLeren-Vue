@@ -11,6 +11,7 @@ Vue.use(VueRouter);
 import dashboard from '../js/components/general/Dashboard';
 import settings from '../js/components/settings/Settings';
 import login from '../js/components/general/login';
+import register from '../js/components/general/register'
 
 const router = new VueRouter({
     mode: 'history',
@@ -19,6 +20,11 @@ const router = new VueRouter({
             path: '/',
             name: dashboard,
             component: dashboard
+        },
+        {
+            path: '/register',
+            name: register,
+            component: register
         },
         {
             path: '/login',
