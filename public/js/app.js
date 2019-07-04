@@ -1969,6 +1969,13 @@ __webpack_require__.r(__webpack_exports__);
       error: false
     };
   },
+  mounted: function mounted() {
+    var isLoggedIn = localStorage.getItem('beta.jwt') != null;
+
+    if (isLoggedIn) {
+      this.$router.push('/');
+    }
+  },
   methods: {
     loggedin: function loggedin(e) {
       var _this = this;
@@ -1981,10 +1988,10 @@ __webpack_require__.r(__webpack_exports__);
           password: password
         }).then(function (response) {
           var user = response.data.user;
-          var user_ID = user.id;
+          var user_name = user.name;
           localStorage.setItem('beta.user', JSON.stringify(user));
           localStorage.setItem('beta.jwt', response.data.token);
-          localStorage.setItem('beta.user_id', user_ID);
+          localStorage.setItem('beta.name', user_name);
 
           _this.$root.$emit('myEvent', true);
 
@@ -2043,10 +2050,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     SubNav: _Sub_Nav__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      isLoggedIn: localStorage.getItem('beta.jwt') != null,
+      user: localStorage.getItem('beta.name')
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('myEvent', function (text) {
+      // here you need to use the arrow function
+      _this.isLoggedIn = text;
+    });
   },
   name: "Nav-Bar"
 });
@@ -2071,15 +2105,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SubNav",
+  data: function data() {
+    return {
+      isLoggedIn: localStorage.getItem('beta.jwt') != null
+    };
+  },
   methods: {
     logout: function logout() {
       localStorage.removeItem('beta.jwt');
       localStorage.removeItem('beta.user');
       this.$root.$emit('myEvent', false);
       this.$router.push('/login');
+      this.isLoggedIn = false;
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$root.$on('myEvent', function (text) {
+      // here you need to use the arrow function
+      _this.isLoggedIn = text;
+    });
   }
 });
 
@@ -37652,50 +37702,101 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", [
-        _c("ul", { staticClass: "navbar-nav" }, [
-          _c("li", { staticClass: "nav-item dropdown" }, [
-            _c(
-              "div",
-              {
-                staticClass: "nav-link dropdown-toggle active p-0",
-                attrs: {
-                  id: "navbarDropdownMenuLink",
-                  role: "button",
-                  "data-toggle": "dropdown",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _vm._v(
-                  "\n                    Pascal huberts\n                    "
+      _vm.isLoggedIn
+        ? _c("div", [
+            _c("ul", { staticClass: "navbar-nav" }, [
+              _c("li", { staticClass: "nav-item dropdown" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "nav-link dropdown-toggle active p-0",
+                    attrs: {
+                      id: "navbarDropdownMenuLink",
+                      role: "button",
+                      "data-toggle": "dropdown",
+                      "aria-haspopup": "true",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.user) +
+                        "\n                    "
+                    ),
+                    _c("img", {
+                      staticClass: "ml-2 rounded-circle",
+                      attrs: {
+                        src: "/img/Profile/default-avatar.png",
+                        alt: "Picture",
+                        width: "40px",
+                        height: "40px"
+                      }
+                    })
+                  ]
                 ),
-                _c("img", {
-                  staticClass: "ml-2 rounded-circle",
-                  attrs: {
-                    src: "/img/Profile/default-avatar.png",
-                    alt: "Picture",
-                    width: "40px",
-                    height: "40px"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "dropdown-menu dropdown-menu-right position-absolute",
-                attrs: { "aria-labelledby": "navbarDropdownMenuLink" }
-              },
-              [_c("Sub-Nav")],
-              1
-            )
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "dropdown-menu dropdown-menu-right position-absolute",
+                    attrs: { "aria-labelledby": "navbarDropdownMenuLink" }
+                  },
+                  [_c("Sub-Nav")],
+                  1
+                )
+              ])
+            ])
           ])
-        ])
-      ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.isLoggedIn
+        ? _c("div", [
+            _c("ul", { staticClass: "navbar-nav" }, [
+              _c("li", { staticClass: "nav-item dropdown" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "nav-link dropdown-toggle active p-0",
+                    attrs: {
+                      id: "navbarDropdownMenuLink",
+                      role: "button",
+                      "data-toggle": "dropdown",
+                      "aria-haspopup": "true",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    Login or Register\n                    "
+                    ),
+                    _c("img", {
+                      staticClass: "ml-2 rounded-circle",
+                      attrs: {
+                        src: "/img/Profile/default-avatar.png",
+                        alt: "Picture",
+                        width: "40px",
+                        height: "40px"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "dropdown-menu dropdown-menu-right position-absolute",
+                    attrs: { "aria-labelledby": "navbarDropdownMenuLink" }
+                  },
+                  [_c("Sub-Nav")],
+                  1
+                )
+              ])
+            ])
+          ])
+        : _vm._e()
     ]
   )
 }
@@ -37745,32 +37846,63 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "router-link",
-        { staticClass: "nav-link text-dark active", attrs: { to: "" } },
-        [_c("i", { staticClass: "fas fa-tasks px-2" }), _vm._v("Progress")]
-      ),
+      _vm.isLoggedIn
+        ? _c(
+            "router-link",
+            { staticClass: "nav-link text-dark active", attrs: { to: "" } },
+            [_c("i", { staticClass: "fas fa-tasks px-2" }), _vm._v("Progress")]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "router-link",
-        { staticClass: "nav-link text-dark", attrs: { to: "/settings" } },
-        [_c("i", { staticClass: "fas fa-user-cog px-2" }), _vm._v("Settings")]
-      ),
+      _vm.isLoggedIn
+        ? _c(
+            "router-link",
+            { staticClass: "nav-link text-dark", attrs: { to: "/settings" } },
+            [
+              _c("i", { staticClass: "fas fa-user-cog px-2" }),
+              _vm._v("Settings")
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.isLoggedIn
+        ? _c(
+            "router-link",
+            {
+              staticClass: "nav-link text-dark active",
+              attrs: { to: "/login" }
+            },
+            [_vm._v("Login")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.isLoggedIn
+        ? _c(
+            "router-link",
+            { staticClass: "nav-link text-dark active", attrs: { to: "" } },
+            [_vm._v("Register")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "dropdown-divider mx-2 border-dark" }),
       _vm._v(" "),
-      _c(
-        "p",
-        {
-          staticClass: "nav-link text-dark",
-          on: {
-            click: function($event) {
-              return _vm.logout()
-            }
-          }
-        },
-        [_c("i", { staticClass: "fas fa-sign-out-alt px-2" }), _vm._v("Logout")]
-      )
+      _vm.isLoggedIn
+        ? _c(
+            "p",
+            {
+              staticClass: "nav-link text-dark",
+              on: {
+                click: function($event) {
+                  return _vm.logout()
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fas fa-sign-out-alt px-2" }),
+              _vm._v("Logout")
+            ]
+          )
+        : _vm._e()
     ],
     1
   )

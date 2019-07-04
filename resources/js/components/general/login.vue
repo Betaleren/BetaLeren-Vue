@@ -34,6 +34,12 @@
                 error: false
             }
         },
+        mounted(){
+            let isLoggedIn = localStorage.getItem('beta.jwt') != null;
+            if(isLoggedIn){
+                this.$router.push('/')
+            }
+        },
         methods: {
             loggedin(e){
                 if(this.password.length > 0){
@@ -41,10 +47,10 @@
                     let password = this.password;
                     axios.post('api/login', {email, password}).then(response => {
                         let user = response.data.user;
-                        let user_ID = user.id;
+                        let user_name = user.name;
                         localStorage.setItem('beta.user', JSON.stringify(user));
                         localStorage.setItem('beta.jwt', response.data.token);
-                        localStorage.setItem('beta.user_id', user_ID);
+                        localStorage.setItem('beta.name', user_name);
                         this.$root.$emit('myEvent', true);
                         this.$router.push('/')
                     });

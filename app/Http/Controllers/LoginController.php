@@ -15,7 +15,7 @@ class LoginController extends Controller
         if (Auth::attempt($request->only(['email', 'password']))) {
             $status = 200;
             $response = [
-                'user' => Auth::user(),
+                $user = 'user' => Auth::user(),
                 $token = 'token' => Auth::user()->createToken('beta')->accessToken,
             ];
         }
