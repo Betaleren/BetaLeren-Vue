@@ -1,2 +1,2 @@
-START cmd.exe /k "cd D:\Web-Development\BetaLeren-Vue && php artisan serve"
-START cmd.exe /k "cd D:\Web-Development\BetaLeren-Vue && npm run watch"
+START cmd.exe /k "cd D:\Development\web\BetaLeren-Vue && php artisan serve"
+START cmd.exe /k "cd D:\Development\web\BetaLeren-Vue && npm run watch"

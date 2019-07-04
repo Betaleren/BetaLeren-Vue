@@ -88,6 +88,6 @@ fabric.properties
 .idea/sonarlint
 \.idea/
 
-.bat
+*.bat
 
 package\.json
