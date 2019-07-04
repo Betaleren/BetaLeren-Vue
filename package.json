@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "private": true,
     "scripts": {
         "dev": "npm run development",
@@ -27,8 +26,7 @@
     "dependencies": {
         "vue-fragment": "^1.5.1",
         "vue-router": "^3.0.6"
-    }
-=======
+    },
   "private": true,
   "scripts": {
     "dev": "npm run development",
@@ -74,5 +72,4 @@
     "url": "https://github.com/L27SlubbyGames/BetaLeren-Vue/issues"
   },
   "homepage": "https://github.com/L27SlubbyGames/BetaLeren-Vue#readme"
->>>>>>> Develop-P
 }
