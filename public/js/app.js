@@ -1988,10 +1988,12 @@ __webpack_require__.r(__webpack_exports__);
           password: password
         }).then(function (response) {
           var user = response.data.user;
-          var user_name = user.name;
+          var user_firstname = user.firstname;
+          var user_lastname = user.lastname;
           localStorage.setItem('beta.user', JSON.stringify(user));
           localStorage.setItem('beta.jwt', response.data.token);
-          localStorage.setItem('beta.name', user_name);
+          localStorage.setItem('beta.firstname', user_firstname);
+          localStorage.setItem('beta.lastname', user_lastname);
 
           _this.$root.$emit('myEvent', true);
 
@@ -2071,15 +2073,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       isLoggedIn: localStorage.getItem('beta.jwt') != null,
-      user: localStorage.getItem('beta.name')
+      user: localStorage.getItem('beta.firstname')
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     this.$root.$on('myEvent', function (text) {
-      // here you need to use the arrow function
       _this.isLoggedIn = text;
+      _this.user = localStorage.getItem('beta.firstname');
     });
   },
   name: "Nav-Bar"
@@ -2118,6 +2120,8 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       localStorage.removeItem('beta.jwt');
       localStorage.removeItem('beta.user');
+      localStorage.removeItem('beta.firstname');
+      localStorage.removeItem('beta.lastname');
       this.$root.$emit('myEvent', false);
       this.$router.push('/login');
       this.isLoggedIn = false;

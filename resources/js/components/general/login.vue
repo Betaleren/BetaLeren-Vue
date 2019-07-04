@@ -47,10 +47,12 @@
                     let password = this.password;
                     axios.post('api/login', {email, password}).then(response => {
                         let user = response.data.user;
-                        let user_name = user.name;
+                        let user_firstname = user.firstname;
+                        let user_lastname = user.lastname
                         localStorage.setItem('beta.user', JSON.stringify(user));
                         localStorage.setItem('beta.jwt', response.data.token);
-                        localStorage.setItem('beta.name', user_name);
+                        localStorage.setItem('beta.firstname', user_firstname);
+                        localStorage.setItem('beta.lastname', user_lastname);
                         this.$root.$emit('myEvent', true);
                         this.$router.push('/')
                     });

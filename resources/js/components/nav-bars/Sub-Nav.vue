@@ -21,6 +21,8 @@
             logout(){
                 localStorage.removeItem('beta.jwt');
                 localStorage.removeItem('beta.user');
+                localStorage.removeItem('beta.firstname');
+                localStorage.removeItem('beta.lastname')
                 this.$root.$emit('myEvent', false);
                 this.$router.push('/login');
                 this.isLoggedIn = false

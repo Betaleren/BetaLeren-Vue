@@ -57,12 +57,13 @@
         data(){
             return{
                 isLoggedIn: localStorage.getItem('beta.jwt') != null,
-                user: localStorage.getItem('beta.name') 
+                user: localStorage.getItem('beta.firstname')
             }
         },
         mounted() {
-            this.$root.$on('myEvent', (text) => { // here you need to use the arrow function
+            this.$root.$on('myEvent', (text) => {
                 this.isLoggedIn = text
+                this.user = localStorage.getItem('beta.firstname')
             })
         },
         name: "Nav-Bar"
