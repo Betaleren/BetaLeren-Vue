@@ -3,3 +3,46 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+// css for bigger than the sizes
+@include media-breakpoint-up(sm) {
+
+}
+
+@include media-breakpoint-up(md) {
+
+}
+
+@include media-breakpoint-up(lg) {
+    .w-lg-75 {
+        width: 75%;
+    }
+}
+
+@include media-breakpoint-up(xl) {
+
+}
+
+// css for smaller than the sizes
+@include media-breakpoint-down(xs) {
+
+}
+
+@include media-breakpoint-down(sm) {
+
+}
+
+@include media-breakpoint-down(md) {
+
+}
+
+@include media-breakpoint-down(lg) {
+    .mx--lg-3 {
+        margin: 0 $spacer;
+    }
+}
+
+.mt-7 {
+    margin-top: ($spacer * 6);
+}

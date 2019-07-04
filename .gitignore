@@ -91,3 +91,5 @@ fabric.properties
 *.bat
 
 package\.json
+
+package-lock\.json
