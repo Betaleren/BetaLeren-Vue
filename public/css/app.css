@@ -11100,26 +11100,10 @@ a.text-dark:focus {
   }
 }
 
-.login-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
 .container-videos {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-}
-
-.login {
-  height: 100vh;
-}
-
-.clickable {
-  cursor: pointer;
 }
 
 @media (min-width: 287px) {
@@ -11171,6 +11155,12 @@ a.text-dark:focus {
   }
 }
 
+@media (min-width: 576px) {
+  .w-sm-400 {
+    width: 400px;
+  }
+}
+
 @media (min-width: 992px) {
   .w-lg-75 {
     width: 75%;
@@ -11187,6 +11177,13 @@ a.text-dark:focus {
   .mx--lg-3 {
     margin: 0 1rem;
   }
+}
+
+.btn:active,
+.btn:focus,
+.btn.focus,
+.form-control:focus {
+  box-shadow: none !important;
 }
 
 .mt-7 {
@@ -11217,5 +11214,21 @@ a.text-dark:focus {
 
 .continue-videos {
   display: none;
+}
+
+.activeLine {
+  border-bottom: 1px solid #3490dc;
+}
+
+.login-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.clickable {
+  cursor: pointer;
 }
 

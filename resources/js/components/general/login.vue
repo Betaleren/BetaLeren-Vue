@@ -1,27 +1,21 @@
 <template>
-    <div>
-        <div class="row m-0">
-            <div class="m-auto col-sm-12 col-md-6 col-lg-6 col-xl-4 login-card">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="m-0 text-center">Login</h3>
-                    </div>
-                    <div class="card-body">
-                        <form @submit.prevent="" method="post">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" v-model="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" aria-describedby="error" placeholder="Password" v-model="password">
-                                <small id="error" class="form-text text-danger" v-if="error">Uw email of wachtwoord is onjuist</small>
-                            </div>
-                            <button type="submit" class="btn btn-primary" @click="loggedin">Submit</button>
-                        </form>
-                    </div>
+    <div class="card w-sm-400 login-card">
+        <div class="card-header">
+            <h3 class="m-0 text-center text-muted">Login</h3>
+        </div>
+        <div class="card-body">
+            <form @submit.prevent="loggedin" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" v-model="email">
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" aria-describedby="error" placeholder="Password" v-model="password">
+                    <small id="error" class="form-text text-danger" v-if="error">Uw email of wachtwoord is onjuist</small>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
         </div>
     </div>
 </template>
