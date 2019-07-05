@@ -3,7 +3,7 @@
         <header>
             <nav-bar></nav-bar>
         </header>
-        <main>
+        <main class="mt-7 w-lg-75 mx-lg-auto mx--lg-3">
             <router-view></router-view>
         </main>
         <footer>
