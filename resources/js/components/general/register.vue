@@ -55,11 +55,11 @@
                     this.cpassword = ""
                     return alert('password do not match')
                 }
-                let firstname = this.firstname
-                let lastname = this.lastname
-                let email = this.email
-                let password = this.password
-                let c_password = this.cpassword
+                let firstname = this.firstname,
+                    lastname = this.lastnamel,
+                    email = this.email,
+                    password = this.password,
+                    c_password = this.cpassword;
                 axios.post('api/register', {firstname, lastname,  email, password, c_password}).then(response =>{
                     this.$router.push('/login')
                 })

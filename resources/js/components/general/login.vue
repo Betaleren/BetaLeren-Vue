@@ -57,6 +57,7 @@
                         }
                         localStorage.setItem('beta.user', JSON.stringify(user));
                         localStorage.setItem('beta.jwt', response.data.token);
+                        localStorage.setItem('beta.id', user.id);
                         localStorage.setItem('beta.firstname', user_firstname);
                         localStorage.setItem('beta.lastname', user_lastname);
                         this.$root.$emit('myEvent', true);
