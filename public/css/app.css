@@ -11112,3 +11112,7 @@ a.text-dark:focus {
   height: 100vh;
 }
 
+.clickable {
+  cursor: pointer;
+}
+

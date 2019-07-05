@@ -5,7 +5,7 @@
         <router-link to="/login" class="nav-link text-dark active" v-if="!isLoggedIn">Login</router-link>
         <router-link to="/register" class="nav-link text-dark active" v-if="!isLoggedIn">Register</router-link>
         <div class="dropdown-divider mx-2 border-dark"></div>
-        <p class="nav-link text-dark" @click="logout()" v-if="isLoggedIn"><i class='fas fa-sign-out-alt px-2'></i>Logout</p>
+        <p class="nav-link text-dark clickable" @click="logout()" v-if="isLoggedIn"><i class='fas fa-sign-out-alt px-2'></i>Logout</p>
     </div>
 </template>
 
@@ -14,7 +14,8 @@
         name: "SubNav",
         data(){
             return{
-                isLoggedIn: localStorage.getItem('beta.jwt') != null
+                isLoggedIn: localStorage.getItem('beta.jwt') != null,
+                isAdmin: localStorage.getItem('beta.admin') != null
             }
         },
         methods: {
@@ -22,13 +23,18 @@
                 localStorage.removeItem('beta.jwt');
                 localStorage.removeItem('beta.user');
                 localStorage.removeItem('beta.firstname');
-                localStorage.removeItem('beta.lastname')
+                localStorage.removeItem('beta.lastname');
+                localStorage.removeItem('beta.admin');
                 this.$root.$emit('myEvent', false);
+                this.$root.$emit('admindelete', false);
                 this.$router.push('/login');
                 this.isLoggedIn = false
             }
         },
         mounted() {
+            this.$root.$on('admindelete', (text) => {
+                this.isAdmin = text
+            });
             this.$root.$on('myEvent', (text) => { // here you need to use the arrow function
                 this.isLoggedIn = text
             })

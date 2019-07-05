@@ -1990,6 +1990,15 @@ __webpack_require__.r(__webpack_exports__);
           var user = response.data.user;
           var user_firstname = user.firstname;
           var user_lastname = user.lastname;
+
+          if (user.is_admin === 1) {
+            localStorage.setItem('beta.admin', true);
+
+            _this.$root.$emit('admindelete', true);
+          } else {
+            localStorage.setItem('beta.admin', false);
+          }
+
           localStorage.setItem('beta.user', JSON.stringify(user));
           localStorage.setItem('beta.jwt', response.data.token);
           localStorage.setItem('beta.firstname', user_firstname);
@@ -1999,6 +2008,8 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$router.push('/');
         });
+      } else {
+        this.error = true;
       }
     }
   }
@@ -2017,7 +2028,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
 //
 //
 //
@@ -2205,7 +2215,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "SubNav",
   data: function data() {
     return {
-      isLoggedIn: localStorage.getItem('beta.jwt') != null
+      isLoggedIn: localStorage.getItem('beta.jwt') != null,
+      isAdmin: localStorage.getItem('beta.admin') != null
     };
   },
   methods: {
@@ -2214,7 +2225,9 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.removeItem('beta.user');
       localStorage.removeItem('beta.firstname');
       localStorage.removeItem('beta.lastname');
+      localStorage.removeItem('beta.admin');
       this.$root.$emit('myEvent', false);
+      this.$root.$emit('admindelete', false);
       this.$router.push('/login');
       this.isLoggedIn = false;
     }
@@ -2222,6 +2235,9 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    this.$root.$on('admindelete', function (text) {
+      _this.isAdmin = text;
+    });
     this.$root.$on('myEvent', function (text) {
       // here you need to use the arrow function
       _this.isLoggedIn = text;
@@ -37850,9 +37866,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                      _vm._v("Password")
-                    ]),
+                    _c("label", [_vm._v("Password")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -37866,8 +37880,6 @@ var render = function() {
                       staticClass: "form-control",
                       attrs: {
                         type: "password",
-                        id: "exampleInputPassword1",
-                        "aria-describedby": "error",
                         placeholder: "Eneter password"
                       },
                       domProps: { value: _vm.password },
@@ -37883,9 +37895,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                      _vm._v("Conformation password")
-                    ]),
+                    _c("label", [_vm._v("Conformation password")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -37899,8 +37909,6 @@ var render = function() {
                       staticClass: "form-control",
                       attrs: {
                         type: "password",
-                        id: "exampleInputPassword1",
-                        "aria-describedby": "error",
                         placeholder: "Enter conformation password"
                       },
                       domProps: { value: _vm.cpassword },
@@ -37912,18 +37920,7 @@ var render = function() {
                           _vm.cpassword = $event.target.value
                         }
                       }
-                    }),
-                    _vm._v(" "),
-                    _vm.error
-                      ? _c(
-                          "small",
-                          {
-                            staticClass: "form-text text-danger",
-                            attrs: { id: "error" }
-                          },
-                          [_vm._v("Uw email of wachtwoord is onjuist")]
-                        )
-                      : _vm._e()
+                    })
                   ]),
                   _vm._v(" "),
                   _c(
@@ -38223,7 +38220,7 @@ var render = function() {
         ? _c(
             "p",
             {
-              staticClass: "nav-link text-dark",
+              staticClass: "nav-link text-dark clickable",
               on: {
                 click: function($event) {
                   return _vm.logout()

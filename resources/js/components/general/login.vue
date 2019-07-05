@@ -48,7 +48,13 @@
                     axios.post('api/login', {email, password}).then(response => {
                         let user = response.data.user;
                         let user_firstname = user.firstname;
-                        let user_lastname = user.lastname
+                        let user_lastname = user.lastname;
+                        if(user.is_admin === 1){
+                            localStorage.setItem('beta.admin', true);
+                            this.$root.$emit('admindelete', true)
+                        }else{
+                            localStorage.setItem('beta.admin', false)
+                        }
                         localStorage.setItem('beta.user', JSON.stringify(user));
                         localStorage.setItem('beta.jwt', response.data.token);
                         localStorage.setItem('beta.firstname', user_firstname);
@@ -56,6 +62,8 @@
                         this.$root.$emit('myEvent', true);
                         this.$router.push('/')
                     });
+                }else{
+                    this.error = true
                 }
             }
         }

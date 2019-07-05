@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
+use Mail;
 
 class LoginController extends Controller
 {
@@ -39,6 +40,12 @@ class LoginController extends Controller
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
         $user->is_admin = 0;
+
+        Mail::send('emails.reminder', ['user' => $user], function ($m) use ($user) {
+            $m->from('info@betaleren.nl', 'Welcome to betaleren');
+
+            $m->to($user->email, $user->firstname)->subject('Your Reminder!');
+        });
         return Response()->json([
             'user' => $user,
             'token' => $user->createToken('Forum')->accessToken,
