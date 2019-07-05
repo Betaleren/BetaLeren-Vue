@@ -11100,6 +11100,22 @@ a.text-dark:focus {
   }
 }
 
+<<<<<<< HEAD
+.login-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.login {
+  height: 100vh;
+}
+
+.clickable {
+  cursor: pointer;
+=======
 .container-videos {
   width: 100%;
   margin-right: auto;
@@ -11153,6 +11169,7 @@ a.text-dark:focus {
   .continue-videos {
     max-height: 135px;
   }
+>>>>>>> Develop-P
 }
 
 @media (min-width: 992px) {
