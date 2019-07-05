@@ -3,6 +3,9 @@
         <div class="row m-0">
             <div class="m-auto col-sm-12 col-md-6 col-lg-6 col-xl-4 login-card">
                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="m-0 text-center">Register</h3>
+                    </div>
                     <div class="card-body">
                         <form @submit.prevent="" method="post">
                             <div class="form-group">
@@ -11,11 +14,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Firstname</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter firstname" v-model="firstname">
+                                <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Enter firstname" v-model="firstname">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Lastname</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter lastname" v-model="lastname">
+                                <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Enter lastname" v-model="lastname">
                             </div>
                             <div class="form-group">
                                 <label >Password</label>

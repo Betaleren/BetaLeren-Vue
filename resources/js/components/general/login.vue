@@ -3,6 +3,9 @@
         <div class="row m-0">
             <div class="m-auto col-sm-12 col-md-6 col-lg-6 col-xl-4 login-card">
                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="m-0 text-center">Login</h3>
+                    </div>
                     <div class="card-body">
                         <form @submit.prevent="" method="post">
                             <div class="form-group">

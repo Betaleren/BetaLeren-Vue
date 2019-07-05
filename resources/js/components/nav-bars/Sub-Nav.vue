@@ -5,7 +5,7 @@
         <router-link to="/profile?u_id=7" class="nav-link text-dark active" v-if="isLoggedIn"><i class='fas fa-user px-2'></i>Profile</router-link>
         <router-link to="/settings" class="nav-link text-dark active" v-if="isLoggedIn"><i class='fas fa-user-cog px-2'></i>Settings</router-link>
         <div class="dropdown-divider mx-2 border-dark"></div>
-        <p class="nav-link text-dark clickable" @click="logout()" v-if="isLoggedIn"><i class='fas fa-sign-out-alt px-2'></i>Logout</p>
+        <p class="nav-link text-dark clickable m-0" @click="logout()" v-if="isLoggedIn"><i class='fas fa-sign-out-alt px-2'></i>Logout</p>
     </div>
 </template>
 
