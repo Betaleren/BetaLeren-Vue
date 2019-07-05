@@ -4,6 +4,50 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//container-dashboard
+.container-videos {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 287px) {
+    .container-videos {
+        max-width: 210px !important;
+    }
+}
+
+@media (min-width: 452px) {
+    .container-videos {
+        max-width: 420px !important;
+    }
+}
+
+@media (min-width: 662px) {
+    .container-videos {
+        max-width: 630px !important;
+    }
+}
+
+@media (min-width: 1120px) {
+    .container-videos{
+        max-width: 840px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container-videos {
+        max-width: 1050px !important;
+    }
+}
+
+@media (min-width: 1680px) {
+    .container-videos {
+        max-width: 1260px !important;
+    }
+}
+
+
 
 // css for bigger than the sizes
 @include media-breakpoint-up(sm) {
@@ -45,4 +89,26 @@
 
 .mt-7 {
     margin-top: ($spacer * 6);
+}
+
+.line {
+    width: calc(100% + .5rem);
+    margin-left: -.25rem;
+    border-color: rgba(0, 0, 0, 0.125);
+    margin-top: $spacer;
+    margin-bottom: $spacer;
+}
+
+.size-11 {
+    font-size: 11px;
+}
+
+.badge-videos {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: .25rem;
+    margin-right: .25rem;
+    color: $primary-color;
+    background-color: rgba(0, 0, 0, 0.5);
 }

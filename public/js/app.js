@@ -1895,6 +1895,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
   data: function data() {
@@ -37422,50 +37442,128 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row justify-content-center" },
-    _vm._l(_vm.tests, function(test) {
-      return _c(
-        "div",
-        {
-          key: test.id,
-          staticClass: "p-1",
-          staticStyle: { "min-width": "210px", "max-width": "210px" }
-        },
-        [
-          _vm._m(0, true),
-          _vm._v(" "),
-          _c("div", {
-            staticClass: "dropdown-divider border-dark",
-            staticStyle: { width: "calc(100% + .5rem)" }
-          })
-        ]
-      )
-    }),
-    0
+    { staticClass: "row container-videos" },
+    [
+      _c("h3", { staticClass: "px-1 text-muted" }, [
+        _vm._v("Continue Watching:")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-1" }, [
+        _c(
+          "div",
+          { staticClass: "card border-0 bg-transparent" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link p-0", attrs: { to: "/video" } },
+              [
+                _c("div", { staticClass: "row no-gutters" }, [
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("span", { staticClass: "badge badge-videos" }, [
+                      _vm._v("00:00:00")
+                    ]),
+                    _vm._v(" "),
+                    _c("img", {
+                      staticClass: "card-img",
+                      attrs: {
+                        src: "img/thumbnail/video-background.jpg",
+                        alt: "thumbnail"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "div",
+                      { staticClass: "card-body d-flex flex-column h-100" },
+                      [
+                        _c("h5", { staticClass: "card-title text-muted" }, [
+                          _vm._v("Title")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text text-muted" }, [
+                          _vm._v(
+                            "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text mt-auto" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Uploader")
+                          ])
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "dropdown-divider line mx-0" }),
+      _vm._v(" "),
+      _vm._l(_vm.tests, function(test) {
+        return _c(
+          "div",
+          {
+            key: test.id,
+            staticClass: "p-1",
+            staticStyle: { "min-width": "210px", "max-width": "210px" }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "card border-0 bg-transparent" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav-link p-0", attrs: { to: "/video" } },
+                  [
+                    _c("div", { staticClass: "position-relative" }, [
+                      _c("img", {
+                        staticClass: "card-img-top p-0 rounded",
+                        attrs: {
+                          src: "img/thumbnail/video-background.jpg",
+                          alt: "thumbnail"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "badge badge-videos" }, [
+                        _vm._v("00:00:00")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-body px-0 py-1" }, [
+                      _c("div", { staticClass: "d-flex flex-column" }, [
+                        _c("h5", { staticClass: "card-title m-0 text-muted" }, [
+                          _vm._v("Title")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text m-0" }, [
+                          _c("small", { staticClass: "text-muted" }, [
+                            _vm._v("Uploader")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-divider line" })
+          ]
+        )
+      })
+    ],
+    2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "d-flex flex-column" }, [
-          _c("div", {}, [_c("img", { attrs: { src: "", alt: "" } })]),
-          _vm._v(" "),
-          _c("div", {}, [
-            _vm._v("\n                        lol\n                    ")
-          ]),
-          _vm._v(" "),
-          _c("div", {}, [
-            _vm._v("\n                        lol\n                    ")
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -53135,8 +53233,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Web-Development\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Web-Development\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\pmhub\Documents\GitHub\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\pmhub\Documents\GitHub\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
