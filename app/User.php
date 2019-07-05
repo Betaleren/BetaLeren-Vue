@@ -1,12 +1,13 @@
 <?php
-
 namespace App;
-
-use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+class User extends Authenticatable
 {
-
+    use Notifiable, HasApiTokens;
     /**
      * The attributes that are mass assignable.
      *
@@ -14,11 +15,22 @@ class User extends Model
      */
     protected $table = 'users';
     protected $fillable = [
-        'id',
+        'firstname', 'lastname', 'email', 'password',
     ];
-
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'passcode',
     ];
-
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }
