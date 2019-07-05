@@ -11107,11 +11107,6 @@ a.text-dark:focus {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-@media (min-width: 992px) {
-  .w-lg-75 {
-    width: 75%;
-  }
-}
 
 .login {
   height: 100vh;
@@ -11121,6 +11116,11 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+@media (min-width: 992px) {
+  .w-lg-75 {
+    width: 75%;
+  }
+}
 
 @media (max-width: 1199.98px) {
   .mx--lg-3 {
