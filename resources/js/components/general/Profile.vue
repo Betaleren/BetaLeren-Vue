@@ -1,5 +1,6 @@
 <template>
     <fragment>
+        {{ user }}
         <div v-for="u in user" :key="u.id">
             <div class="center text-center mb-5">
                 <div class="caption">
@@ -61,10 +62,11 @@
         methods: {
             getUser: async function() {
                 axios.get('api/user/' + this.data)
-                    .then(response => {this.user = response.data; this.permission = this.getPermission(this.user[0].permission);
+                    .then(response => {this.user = response.data; //
+                        // this.permission = this.getPermission(this.user[0].permission);
                              console.log(this.user)});
-                axios.get('api/time/' + this.data)
-                    .then(response => (this.time = response.data));
+/*                axios.get('api/time/' + this.data)
+                    .then(response => (this.time = response.data));*/
 
             },
 
@@ -82,7 +84,7 @@
         },
         mounted() {
             this.getUser();
-            this.getJoinedCourses();
+            // this.getJoinedCourses();
 
     },
     }

@@ -1979,6 +1979,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Profile",
@@ -2003,15 +2004,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/user/' + this.data).then(function (response) {
-                  _this.user = response.data;
-                  _this.permission = _this.getPermission(_this.user[0].permission);
+                  _this.user = response.data; //
+                  // this.permission = this.getPermission(this.user[0].permission);
+
                   console.log(_this.user);
                 });
-                axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/time/' + this.data).then(function (response) {
-                  return _this.time = response.data;
-                });
+                /*                axios.get('api/time/' + this.data)
+                                    .then(response => (this.time = response.data));*/
 
-              case 2:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -2043,8 +2044,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.getUser();
-    this.getJoinedCourses();
+    this.getUser(); // this.getJoinedCourses();
   }
 });
 
@@ -38507,114 +38507,117 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "fragment",
-    _vm._l(_vm.user, function(u) {
-      return _c(
-        "div",
-        { key: u.id },
-        [
-          _c("div", { staticClass: "center text-center mb-5" }, [
-            _c("div", { staticClass: "caption" }, [
-              _c("h1", { staticClass: "title display-3" }, [
-                _vm._v(_vm._s(u.firstname + " " + u.lastname))
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "card mx-auto", staticStyle: { width: "18rem" } },
-            [
-              _c("img", {
-                staticClass: "card-img-top",
-                attrs: {
-                  src: "img/Profile/default-avatar.png",
-                  alt: "Card image cap"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("h5", { staticClass: "card-title font-weight-bold" }, [
-                  _vm._v("User information")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v(_vm._s(_vm.permission))
+    [
+      _vm._v("\n    " + _vm._s(_vm.user) + "\n    "),
+      _vm._l(_vm.user, function(u) {
+        return _c(
+          "div",
+          { key: u.id },
+          [
+            _c("div", { staticClass: "center text-center mb-5" }, [
+              _c("div", { staticClass: "caption" }, [
+                _c("h1", { staticClass: "title display-3" }, [
+                  _vm._v(_vm._s(u.firstname + " " + u.lastname))
                 ])
-              ]),
-              _vm._v(" "),
-              _c("ul", { staticClass: "list-group list-group-flush" }, [
-                _c("li", { staticClass: "list-group-item" }, [
-                  _vm._v("Joined: " + _vm._s(_vm.time))
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card mx-auto", staticStyle: { width: "18rem" } },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: {
+                    src: "img/Profile/default-avatar.png",
+                    alt: "Card image cap"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title font-weight-bold" }, [
+                    _vm._v("User information")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(_vm._s(_vm.permission))
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "list-group-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "text-primary",
-                      staticStyle: {
-                        cursor: "pointer",
-                        "text-decoration": "none"
-                      }
-                    },
-                    [_vm._v("Watch progress")]
+                _c("ul", { staticClass: "list-group list-group-flush" }, [
+                  _c("li", { staticClass: "list-group-item" }, [
+                    _vm._v("Joined: " + _vm._s(_vm.time))
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "list-group-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-primary",
+                        staticStyle: {
+                          cursor: "pointer",
+                          "text-decoration": "none"
+                        }
+                      },
+                      [_vm._v("Watch progress")]
+                    )
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", { staticClass: "center text-center mb-5" }, [
+              _c("div", { staticClass: "caption" }, [
+                _c("h3", { staticClass: "title display-4 " }, [
+                  _vm._v(
+                    _vm._s(u.firstname + " " + u.lastname) + " joined courses:"
                   )
                 ])
               ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", { staticClass: "center text-center mb-5" }, [
-            _c("div", { staticClass: "caption" }, [
-              _c("h3", { staticClass: "title display-4 " }, [
-                _vm._v(
-                  _vm._s(u.firstname + " " + u.lastname) + " joined courses:"
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.courses, function(course) {
-            return _c("div", { key: course.id }, [
-              _c("div", { staticStyle: { width: "50px" } }),
-              _vm._v(" "),
-              _c("div", { staticClass: "card mb-3 text-center  bg-light" }, [
-                _c("div", {}, [
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.courses, function(course) {
+              return _c("div", { key: course.id }, [
+                _c("div", { staticStyle: { width: "50px" } }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card mb-3 text-center  bg-light" }, [
                   _c("div", {}, [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h4", { staticClass: "card-title" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-primary",
-                            staticStyle: {
-                              cursor: "pointer",
-                              "text-decoration": "none"
+                    _c("div", {}, [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "text-primary",
+                              staticStyle: {
+                                cursor: "pointer",
+                                "text-decoration": "none"
+                              },
+                              attrs: { href: "" }
                             },
-                            attrs: { href: "" }
-                          },
-                          [_vm._v(_vm._s(course.title))]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v(_vm._s(course.description))
-                      ]),
-                      _vm._v(" "),
-                      _c("hr", { staticStyle: { "max-width": "80%" } })
+                            [_vm._v(_vm._s(course.title))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(course.description))
+                        ]),
+                        _vm._v(" "),
+                        _c("hr", { staticStyle: { "max-width": "80%" } })
+                      ])
                     ])
                   ])
                 ])
               ])
-            ])
-          })
-        ],
-        2
-      )
-    }),
-    0
+            })
+          ],
+          2
+        )
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = []
