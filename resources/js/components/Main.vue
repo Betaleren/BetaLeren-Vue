@@ -19,6 +19,16 @@
         components: {
             NavBar,
         },
-        name: "Main"
+        data(){
+            return{
+                isLoggedIn: localStorage.getItem('beta.jwt') != null,
+            }
+        },
+        name: "Main",
+        mounted() {
+            this.$root.$on('myEvent', (text) => { // here you need to use the arrow function
+                this.isLoggedIn = text
+            })
+        }
     }
 </script>

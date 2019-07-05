@@ -27,3 +27,11 @@ Route::get('/profile', function () {
 Route::get('/settings', function () {
     return view('Main');
 });
+
+Route::get('/login', function (){
+    return view('main');
+});
+
+Route::get('/register', function (){
+    return view('main');
+});

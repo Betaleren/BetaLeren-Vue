@@ -11100,6 +11100,22 @@ a.text-dark:focus {
   }
 }
 
+.login-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.login {
+  height: 100vh;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 @media (min-width: 992px) {
   .w-lg-75 {
     width: 75%;
