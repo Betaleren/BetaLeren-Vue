@@ -5,14 +5,14 @@
             <div class="card border-0 bg-transparent">
                 <router-link to="/video" class="nav-link p-0">
                     <div class="row no-gutters">
-                        <div class="col-md-4">
+                        <div class="col-lg-4">
                             <span class="badge badge-videos">00:00:00</span>
                             <img :src="'img/thumbnail/video-background.jpg'" class="card-img" alt="thumbnail">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-lg-8">
                             <div class="card-body d-flex flex-column h-100">
-                                <h5 class="card-title text-muted">Title</h5>
-                                <p class="card-text text-muted">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <h5 class="card-title text-muted mb-2">Title</h5>
+                                <p class="card-text text-muted mb-2 overflow-auto continue-videos">This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content.This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content. wwewa adawd awdawd awd wad awd awd awdawd awd a daw daw dwa. This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content.This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content.</p>
                                 <p class="card-text mt-auto"><small class="text-muted">Uploader</small></p>
                             </div>
                         </div>

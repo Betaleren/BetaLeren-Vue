@@ -11128,11 +11128,20 @@ a.text-dark:focus {
   .container-videos {
     max-width: 840px !important;
   }
+
+  .continue-videos {
+    max-height: 55px;
+    display: block !important;
+  }
 }
 
 @media (min-width: 1400px) {
   .container-videos {
     max-width: 1050px !important;
+  }
+
+  .continue-videos {
+    max-height: 95px;
   }
 }
 
@@ -11140,11 +11149,21 @@ a.text-dark:focus {
   .container-videos {
     max-width: 1260px !important;
   }
+
+  .continue-videos {
+    max-height: 135px;
+  }
 }
 
 @media (min-width: 992px) {
   .w-lg-75 {
     width: 75%;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .continue-videos {
+    display: block !important;
   }
 }
 
@@ -11178,5 +11197,9 @@ a.text-dark:focus {
   margin-right: 0.25rem;
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.continue-videos {
+  display: none;
 }
 

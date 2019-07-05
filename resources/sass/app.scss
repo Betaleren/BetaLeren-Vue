@@ -33,17 +33,30 @@
     .container-videos{
         max-width: 840px !important;
     }
+
+    .continue-videos {
+        max-height: 55px;
+        display: block!important;
+    }
 }
 
 @media (min-width: 1400px) {
     .container-videos {
         max-width: 1050px !important;
     }
+
+    .continue-videos {
+        max-height: 95px;
+    }
 }
 
 @media (min-width: 1680px) {
     .container-videos {
         max-width: 1260px !important;
+    }
+
+    .continue-videos {
+        max-height: 135px;
     }
 }
 
@@ -78,7 +91,9 @@
 }
 
 @include media-breakpoint-down(md) {
-
+    .continue-videos {
+        display: block!important;
+    }
 }
 
 @include media-breakpoint-down(lg) {
@@ -111,4 +126,8 @@
     margin-right: .25rem;
     color: $primary-color;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.continue-videos {
+    display: none;
 }

@@ -38290,7 +38290,7 @@ var render = function() {
               { staticClass: "nav-link p-0", attrs: { to: "/video" } },
               [
                 _c("div", { staticClass: "row no-gutters" }, [
-                  _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "col-lg-4" }, [
                     _c("span", { staticClass: "badge badge-videos" }, [
                       _vm._v("00:00:00")
                     ]),
@@ -38304,20 +38304,29 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
+                  _c("div", { staticClass: "col-lg-8" }, [
                     _c(
                       "div",
                       { staticClass: "card-body d-flex flex-column h-100" },
                       [
-                        _c("h5", { staticClass: "card-title text-muted" }, [
-                          _vm._v("Title")
-                        ]),
+                        _c(
+                          "h5",
+                          { staticClass: "card-title text-muted mb-2" },
+                          [_vm._v("Title")]
+                        ),
                         _vm._v(" "),
-                        _c("p", { staticClass: "card-text text-muted" }, [
-                          _vm._v(
-                            "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-                          )
-                        ]),
+                        _c(
+                          "p",
+                          {
+                            staticClass:
+                              "card-text text-muted mb-2 overflow-auto continue-videos"
+                          },
+                          [
+                            _vm._v(
+                              "This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content.This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content. wwewa adawd awdawd awd wad awd awd awdawd awd a daw daw dwa. This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content.This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content."
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("p", { staticClass: "card-text mt-auto" }, [
                           _c("small", { staticClass: "text-muted" }, [
@@ -38714,7 +38723,7 @@ var render = function() {
         "router-link",
         {
           staticClass: "nav-link text-dark active",
-          attrs: { to: "/profile?test=7" }
+          attrs: { to: "/profile?u_id=7" }
         },
         [_c("i", { staticClass: "fas fa-user px-2" }), _vm._v("Profile")]
       ),
@@ -38758,7 +38767,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("h1", [_vm._v("Settings")])
 }
 var staticRenderFns = []
 render._withStripped = true
