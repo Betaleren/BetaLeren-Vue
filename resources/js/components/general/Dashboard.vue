@@ -3,7 +3,7 @@
         <h3 class="px-1 text-muted">Continue Watching:</h3>
         <div class="p-1">
             <div class="card border-0 bg-transparent">
-                <router-link to="/video" class="nav-link p-0">
+                <router-link to="/watch" class="nav-link p-0">
                     <div class="row no-gutters">
                         <div class="col-lg-4">
                             <span class="badge badge-videos">00:00:00</span>
@@ -23,7 +23,7 @@
         <div class="dropdown-divider line mx-0"></div>
         <div class="p-1" style="min-width: 210px; max-width: 210px;" v-for="test in tests" :key="test.id">
             <div class="card border-0 bg-transparent">
-                <router-link to="/video" class="nav-link p-0">
+                <router-link to="/watch" class="nav-link p-0">
                     <div class="position-relative">
                         <img class="card-img-top p-0 rounded" :src="'img/thumbnail/video-background.jpg'" alt="thumbnail">
                         <span class="badge badge-videos">00:00:00</span>
