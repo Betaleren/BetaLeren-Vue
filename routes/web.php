@@ -22,7 +22,12 @@ Route::get('/settings', function () {
 Route::get('/profile', function () {
     return view('main');
 });
-
+Route::get('/progress', function () {
+    return view('main');
+});
+Route::get('/profile-courses', function () {
+    return view('main');
+});
 
 Route::get('/settings', function () {
     return view('Main');

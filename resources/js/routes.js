@@ -12,7 +12,9 @@ import dashboard from '../js/components/general/Dashboard';
 import settings from '../js/components/settings/Settings';
 import login from '../js/components/general/login';
 import register from '../js/components/general/register'
-import profile from '../js/components/general/Profile'
+import profile from './components/profile/Profile'
+import progress from './components/profile/info/Progress'
+import profile_courses from './components/profile/info/Profile-Courses'
 
 const router = new VueRouter({
     mode: 'history',
@@ -41,6 +43,16 @@ const router = new VueRouter({
             path: "/profile",
             name: profile,
             component: profile,
+        },
+        {
+            path: "/progress",
+            name: progress,
+            component: progress,
+        },
+        {
+            path: "/profile-courses",
+            name: profile_courses,
+            component: profile_courses,
         },
     ]
 });
