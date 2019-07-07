@@ -22,6 +22,7 @@
             logout(){
                 localStorage.removeItem('beta.jwt');
                 localStorage.removeItem('beta.user');
+                localStorage.removeItem('beta.id');
                 localStorage.removeItem('beta.firstname');
                 localStorage.removeItem('beta.lastname');
                 localStorage.removeItem('beta.admin');
