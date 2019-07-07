@@ -10,9 +10,11 @@ Vue.use(VueRouter);
 */
 import dashboard from '../js/components/general/Dashboard';
 import settings from '../js/components/settings/Settings';
-import login from '../js/components/general/login';
-import register from '../js/components/general/register'
-import profile from '../js/components/general/Profile'
+import login from '../js/components/authentication/login';
+import register from '../js/components/authentication/register';
+import profile from '../js/components/general/Profile';
+import course from '../js/components/general/Course';
+import video from '../js/components/video/Video';
 
 const router = new VueRouter({
     mode: 'history',
@@ -41,6 +43,16 @@ const router = new VueRouter({
             path: "/profile",
             name: profile,
             component: profile,
+        },
+        {
+            path: "/course",
+            name: course,
+            component: course,
+        },
+        {
+            path: "/watch",
+            name: video,
+            component: video,
         },
     ]
 });

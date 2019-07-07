@@ -1,5 +1,166 @@
 @charset "UTF-8";
 
+#video_box {
+  -webkit-box-flex: 0;
+          flex: 0 480 1280px;
+}
+
+#video_play {
+  position: relative;
+  overflow: hidden;
+}
+
+#video_play:hover #video_controls {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+#video_player {
+  min-width: 480px;
+  width: 100%;
+  max-width: 1280px;
+  display: block;
+  margin: 0 auto;
+  background-color: black;
+}
+
+#video_controls {
+  display: -webkit-box;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  flex-wrap: wrap;
+  -webkit-transform: translateY(100%) translateY(-5px);
+          transform: translateY(100%) translateY(-5px);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+#video_controls_seek_bar {
+  height: 5px;
+  width: 98%;
+  margin: auto;
+  cursor: pointer;
+  background-color: rgba(112, 112, 112, 0.4);
+  position: relative;
+  -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.4, 0, 1, 1);
+  transition: -webkit-transform 0.1s cubic-bezier(0.4, 0, 1, 1);
+  transition: transform 0.1s cubic-bezier(0.4, 0, 1, 1);
+  transition: transform 0.1s cubic-bezier(0.4, 0, 1, 1), -webkit-transform 0.1s cubic-bezier(0.4, 0, 1, 1);
+}
+
+#seek_bar_hover_time {
+  position: absolute;
+  color: #ffffff;
+  width: 45px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: -23px;
+  pointer-events: none;
+}
+
+#seek_bar_hover {
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  background-color: rgba(112, 112, 112, 0.6);
+  pointer-events: none;
+}
+
+#seek_bar_color {
+  height: 5px;
+  width: 100%;
+  background-color: #3490dc;
+  position: absolute;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  pointer-events: none;
+}
+
+#seek_bar_bal {
+  height: 13px;
+  width: 13px;
+  bottom: -4px;
+  left: -4px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #3490dc;
+  pointer-events: none;
+}
+
+#video_controls_buttons {
+  padding: 10px;
+  width: 100%;
+  display: -webkit-box;
+  display: flex;
+}
+
+#video_controls_buttons .button {
+  background: none;
+  font-size: 15px;
+  width: 30px;
+  color: #ffffff;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+#volume {
+  align-self: center;
+  position: relative;
+  margin: 0 4px;
+  width: 100px;
+  height: 21px;
+}
+
+#volume #volume_slider {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 100px;
+  margin: 0;
+  height: 4px;
+  top: 9px;
+  background: #707070;
+  outline: none;
+  cursor: pointer;
+}
+
+#volume #volume_slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #3490dc;
+}
+
+#volume #volume_slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: #3490dc;
+}
+
+#volume #volume_slider::-moz-range-progress {
+  background-color: #3490dc;
+  height: 4px;
+}
+
+#volume #volume_slider::-ms-fill-lower {
+  background: dodgerblue;
+}
+
+.time {
+  color: #ffffff;
+  margin: 0 2px;
+}
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -11100,22 +11261,6 @@ a.text-dark:focus {
   }
 }
 
-<<<<<<< HEAD
-.login-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.login {
-  height: 100vh;
-}
-
-.clickable {
-  cursor: pointer;
-=======
 .container-videos {
   width: 100%;
   margin-right: auto;
@@ -11169,7 +11314,12 @@ a.text-dark:focus {
   .continue-videos {
     max-height: 135px;
   }
->>>>>>> Develop-P
+}
+
+@media (min-width: 576px) {
+  .w-sm-400 {
+    width: 400px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -11188,6 +11338,13 @@ a.text-dark:focus {
   .mx--lg-3 {
     margin: 0 1rem;
   }
+}
+
+.btn:active,
+.btn:focus,
+.btn.focus,
+.form-control:focus {
+  box-shadow: none !important;
 }
 
 .mt-7 {
@@ -11218,5 +11375,21 @@ a.text-dark:focus {
 
 .continue-videos {
   display: none;
+}
+
+.activeLine {
+  border-bottom: 1px solid #3490dc;
+}
+
+.login-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.clickable {
+  cursor: pointer;
 }
 

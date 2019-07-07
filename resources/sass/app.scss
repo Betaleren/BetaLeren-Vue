@@ -1,31 +1,18 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+//video
+@import "video";
 
-.login-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
 //container-dashboard
 .container-videos {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
 }
-
-.login {
-  height: 100vh;
-}
-
-.clickable{
-  cursor: pointer;
-}
-
 
 @media (min-width: 287px) {
     .container-videos {
@@ -80,7 +67,9 @@
 
 // css for bigger than the sizes
 @include media-breakpoint-up(sm) {
-
+    .w-sm-400 {
+        width: 400px;
+    }
 }
 
 @include media-breakpoint-up(md) {
@@ -118,6 +107,13 @@
     }
 }
 
+.btn:active,
+.btn:focus,
+.btn.focus,
+.form-control:focus {
+    box-shadow: none !important;
+}
+
 .mt-7 {
     margin-top: ($spacer * 6);
 }
@@ -146,4 +142,20 @@
 
 .continue-videos {
     display: none;
+}
+
+.activeLine {
+    border-bottom: 1px solid $secondary-color;
+}
+
+.login-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.clickable{
+    cursor: pointer;
 }

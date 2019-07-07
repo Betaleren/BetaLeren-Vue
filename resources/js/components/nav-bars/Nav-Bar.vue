@@ -10,10 +10,10 @@
                         <router-link to="/" class="nav-link">Home<span class="sr-only">(current)</span></router-link>
                     </li>
                     <li class="nav-item active">
-                        <router-link to="" class="nav-link">Categories</router-link>
+                        <router-link to="/course" class="nav-link">Course</router-link>
                     </li>
                     <li class="nav-item active">
-                        <router-link to="" class="nav-link">Examination</router-link>
+                        <router-link to="/" class="nav-link">Examination</router-link>
                     </li>
                 </ul>
             </div>
@@ -21,11 +21,11 @@
         <div v-if="isLoggedIn">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <div class="nav-link dropdown-toggle active p-0" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="nav-link dropdown-toggle active p-0" id="navbarDropdownMenuLink1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{user}}
                         <img :src="'/img/Profile/default-avatar.png'" class="ml-2 rounded-circle" alt="Picture" width="40px" height="40px">
                     </div>
-                    <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdownMenuLink1">
                         <Sub-Nav></Sub-Nav>
                     </div>
                 </li>
@@ -34,11 +34,11 @@
         <div v-if="!isLoggedIn">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <div class="nav-link dropdown-toggle active p-0" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="nav-link dropdown-toggle active p-0" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Login or Register
                         <img :src="'/img/Profile/default-avatar.png'" class="ml-2 rounded-circle" alt="Picture" width="40px" height="40px">
                     </div>
-                    <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdownMenuLink2">
                         <Sub-Nav></Sub-Nav>
                     </div>
                 </li>
@@ -62,7 +62,7 @@
         },
         mounted() {
             this.$root.$on('myEvent', (text) => {
-                this.isLoggedIn = text
+                this.isLoggedIn = text;
                 this.user = localStorage.getItem('beta.firstname')
             })
         },
