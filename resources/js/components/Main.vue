@@ -3,7 +3,7 @@
         <header>
             <nav-bar></nav-bar>
         </header>
-        <main class="mt-7 w-lg-75 mx-lg-auto mx--lg-3">
+        <main class="mt-7 mx-lg-auto w-lg-75 px-15 mx--lg-3" :class="{'w-lg-90': this.$route.meta.show === '1'}">
             <router-view></router-view>
         </main>
         <footer>
@@ -28,7 +28,7 @@
         mounted() {
             this.$root.$on('myEvent', (text) => { // here you need to use the arrow function
                 this.isLoggedIn = text
-            })
+            });
         }
     }
 </script>

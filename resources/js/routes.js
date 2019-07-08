@@ -53,6 +53,9 @@ const router = new VueRouter({
             path: "/watch",
             name: video,
             component: video,
+            meta: {
+                show: '1',
+            },
         },
     ]
 });

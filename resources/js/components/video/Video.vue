@@ -1,34 +1,53 @@
 <template>
-    <div class="d-flex">
-        <div id="video_box">
-            <div id="video_play">
-                <video id="video_player" autoplay :src="'video/Lost_Control.mp4'"></video>
-                <div id="video_controls" style="transform: translateY(0)">
-                    <div id="video_controls_seek_bar" title="Time +5 sec (&#8594), -5 sec (&#8592)">
-                        <span id="seek_bar_hover_time" style="left: 0px; visibility: hidden">00:00</span>
-                        <div id="seek_bar_hover" style="left: 0px; transform: scaleX(0)"></div>
-                        <div id="seek_bar_color" style="left: 0px; transform: scaleX(0)"></div>
-                        <div id="seek_bar_bal" style="transform: translateX(0)"></div>
-                    </div>
-                    <div id="video_controls_buttons">
-                        <button id="play_pause" class="button" title="Play (Space)"><i class="fas fa-play"></i></button>
-                        <button id="volume_button" class="button" title="Mute (M)"><i class="fas fa-volume-up"></i></button>
-                        <div id="volume">
-                            <input id="volume_slider" type="range" min="0" max="100" value="100" step="1" title="Volume up (&#8593;), down (&#8595;)">
-                        </div>
-                        <span id="current_time" class="time">00:00</span><span class="time"> / </span><span id="duration_time" class="time">00:00</span>
-                        <button id="fullscreen" class="button" style="margin-left: auto;"><i class="fas fa-expand" title="Fullscreen (F)"></i></button>
-                    </div>
+    <div id="video">
+        <div class="row">
+            <div class="col-xl p-0">
+                <div>
+                    <VideoControls></VideoControls>
                 </div>
+                <div>
+                    <VideoInfo></VideoInfo>
+                </div>
+                <div v-show="!showComments">
+                    <VideoComments></VideoComments>
+                </div>
+            </div>
+            <div class="w-xl-400 p-0 w--lg-100 pl-xl-3">
+                <div id="course_list"  style="height: 747px">
+                    <VideoListCourse></VideoListCourse>
+                </div>
+                <div>
+                    <VideoList></VideoList>
+                </div>
+            </div>
+            <div v-show="showComments">
+                <VideoComments></VideoComments>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import VideoListCourse from "./video-components/Video-List-Course";
+    import VideoComments from "./video-components/Video-Comments";
+    import VideoList from "./video-components/Video-List";
+    import VideoControls from "./video-components/Video-Controls";
+    import VideoInfo from "./video-components/Video-Info";
     export default {
         name: "Video",
+
+        components: {VideoInfo, VideoControls, VideoList, VideoComments, VideoListCourse},
+
+        data() {
+          return {
+              showComments: false,
+          }
+        },
+
         mounted() {
+            let th1s = this;
+            let cookie_timer = 10 * 365 * 24 * 60 * 60 * 1000;
+            let value = "; " + document.cookie;
             let no_select = document.querySelector('#video');
             let screen = document.querySelector('#video_play');
             let video = document.querySelector('#video_player');
@@ -44,31 +63,35 @@
             let current_time = document.querySelector('#current_time');
             let duration_time = document.querySelector('#duration_time');
             let fullscreen = document.querySelector('#fullscreen');
+            let course_list = document.querySelector('#course_list');
             // let share_link = document.querySelector('#video_share_link');
             // let share_button = document.querySelector('#video_share_button');
             // let share_time = document.querySelector('#video_share_time');
             // let share_time_button = document.querySelector('#video_share_time_button');
             // let textarea = document.querySelector('textarea');
 
-            if (video.paused){
-                play.innerHTML = "<i class='fas fa-play'></i>";
-            } else {
-                play.innerHTML = "<i class='fas fa-pause'></i>";
-                controls.style.transform = '';
-            }
 
-            function getCookie() {
-                let value = "; " + document.cookie;
+            function getCookieVolume() {
                 let parts = value.split("; volume=");
                 if (parts.length === 2) return parts.pop().split(";").shift();
             }
 
-            if (getCookie()){
-                video.volume = getCookie();
+            if (getCookieVolume()){
+                video.volume = getCookieVolume();
                 volume_slider.value = video.volume * 100;
             }
 
-            let taking_quiz = false;
+            function getCookieMute() {
+                let parts = value.split("; mute=");
+                if (parts.length === 2) return parts.pop().split(";").shift();
+            }
+
+            if (getCookieMute()) {
+                video.muted = getCookieMute();
+                volume_slider.value = 0;
+                volume_button.innerHTML = "<i class='fas fa-volume-mute'></i>";
+            }
+
             video.addEventListener('timeupdate', function () {
                 let curmins = Math.floor(video.currentTime / 60);
                 let durmins = Math.floor(video.duration / 60);
@@ -93,30 +116,24 @@
                 }
                 current_time.innerHTML = curmins + ":" + cursecs;
                 duration_time.innerHTML = durmins + ":" + dursecs;
-            });
 
-            setInterval(function () {
                 seek_bar.style.transform = "scaleX("+ video.currentTime / video.duration +")";
                 seek_bal.style.transform = "translateX("+ video_bar.offsetWidth / video.duration * video.currentTime +"px)";
-
-                if (!video.muted) {
-                    if (video.volume > 0.66) {
-                        volume_button.innerHTML = "<i class='fas fa-volume-up'></i>";
-                    }
-                    if (video.volume <= 0.66) {
-                        volume_button.innerHTML = "<i class='fas fa-volume-down'></i>";
-                    }
-                    if (video.volume <= 0.33) {
-                        volume_button.innerHTML = "<i class='fas fa-volume-off'></i>";
-                    }
-                    if (video.volume < 0.001) {
-                        volume_button.innerHTML = "<i class='fas fa-volume-mute'></i>";
-                    }
-                }
-
-                let cookie_timer = 10 * 365 * 24 * 60 * 60 * 1000;
-                document.cookie = 'volume' + "=" + video.volume.toFixed(2) + ";path=/;expires=" + cookie_timer;
             });
+
+            function resizeChange(){
+                if (1200 <= window.innerWidth){
+                    course_list.style.height = video.offsetHeight + 'px';
+                    th1s.showComments =false;
+                } else {
+                    course_list.style.height = '310px';
+                    th1s.showComments = true;
+                }
+            }
+
+            setTimeout(resizeChange, 500);
+
+            window.addEventListener("resize", resizeChange);
 
             function position(e) {
                 video.currentTime = (e.offsetX / video_bar.offsetWidth) * video.duration;
@@ -163,12 +180,20 @@
                 seek_hover_time.style.visibility = "hidden";
             });
 
-            video.addEventListener('mousemove', (e) => mousedown && position(e));
+            window.addEventListener('mousemove', (e) => mousedown && position(e));
 
-            video.addEventListener('mouseup', function() {
+            window.addEventListener('mouseup', function() {
                 no_select.classList.remove('no_select');
                 mousedown = false;
             });
+
+            function noScroll(e){
+                if(e.keyCode === 32 || e.keyCode === 38 || e.keyCode === 40 ) {
+                    e.preventDefault();
+                }
+            }
+
+            window.addEventListener('keydown', noScroll);
 
             function togglePlayPause() {
                 if (video.paused) {
@@ -182,11 +207,7 @@
                 }
             }
 
-            window.addEventListener('keydown', function(e) {
-                if(e.keyCode === 32 && e.target === document.body || e.keyCode === 38 && e.target === document.body || e.keyCode === 40 && e.target === document.body ) {
-                    e.preventDefault();
-                }
-            });
+            togglePlayPause();
 
             play.onclick = function () {
                 togglePlayPause();
@@ -200,8 +221,13 @@
                 if (!video.muted) {
                     video.muted = true;
                     volume_button.innerHTML = "<i class='fas fa-volume-mute'></i>";
+                    volume_slider.value = 0;
+                    document.cookie = "mute=" + true + ";path=/;expires=" + cookie_timer;
                 } else {
                     video.muted = false;
+                    volume_slider.value = getCookieVolume() * 100;
+                    document.cookie = "mute=;path=/;expires=0";
+                    volumeIcon();
                 }
             }
 
@@ -209,9 +235,30 @@
                 mute()
             };
 
-            volume_slider.addEventListener("change", function() {
-                video.volume = volume_slider.value / 100;
-            });
+            function volumeIcon() {
+                if (!video.muted) {
+                    if (volume_slider.value > 66) {
+                        volume_button.innerHTML = "<i class='fas fa-volume-up'></i>";
+                    }
+                    if (volume_slider.value <= 66) {
+                        volume_button.innerHTML = "<i class='fas fa-volume-down'></i>";
+                    }
+                    if (volume_slider.value <= 33) {
+                        volume_button.innerHTML = "<i class='fas fa-volume-off'></i>";
+                    }
+                    if (volume_slider.value <= 0) {
+                        volume_button.innerHTML = "<i class='fas fa-volume-mute'></i>";
+                    }
+
+                    video.volume = volume_slider.value / 100;
+                    document.cookie = "volume=" + video.volume.toFixed(2) + ";path=/;expires=" + cookie_timer;
+                }
+            }
+
+            volumeIcon();
+
+
+            volume_slider.addEventListener("change", volumeIcon);
 
             function openFullscreen() {
                 if (screen.requestFullscreen) {
@@ -235,7 +282,7 @@
             }
 
             fullscreen.onclick = function () {
-                if (1280 >= video.offsetWidth){
+                if (1328 >= video.offsetWidth){
                     openFullscreen();
                 } else {
                     closeFullscreen();
@@ -243,12 +290,10 @@
             };
 
             function dbl_fullscreen() {
-                if (!taking_quiz) {
-                    if (1280 >= video.offsetWidth) {
-                        openFullscreen();
-                    } else {
-                        closeFullscreen();
-                    }
+                if (1328 >= video.offsetWidth) {
+                    openFullscreen();
+                } else {
+                    closeFullscreen();
                 }
             }
 
@@ -264,7 +309,7 @@
                 controls.style.display = '';
                 document.body.style.cursor = '';
                 clearTimeout(timer);
-                timer = setTimeout( controls_display,2000);
+                timer = setTimeout( controls_display, 2000);
             }
 
             screen.addEventListener('mousemove', function () {
@@ -318,51 +363,51 @@
             // });
 
             window.addEventListener('keyup', function (event) {
-                if (!taking_quiz) {
-                    if (!textarea_typing) {
-                        switch (event.keyCode) {
-                            case 32:
-                                togglePlayPause();
-                                break;
-                            case 70:
-                                if (1280 >= video.offsetWidth) {
-                                    openFullscreen()
-                                } else {
-                                    closeFullscreen()
-                                }
-                                break;
-                            case 77:
-                                mute();
-                                break;
-                            case 37:
-                                video.currentTime = video.currentTime - 5;
-                                break;
-                            case 38:
-                                if (video.volume >= 0.9) {
-                                    video.volume = 1;
-                                } else {
-                                    video.volume = video.volume + 0.1;
-                                }
-                                volume_slider.value = video.volume * 100;
-                                break;
-                            case 39:
-                                video.currentTime = video.currentTime + 5;
-                                break;
-                            case 40:
-                                if (video.volume <= 0.1) {
-                                    video.volume = 0;
-                                } else {
-                                    video.volume = video.volume - 0.1;
-                                }
-                                volume_slider.value = video.volume * 100;
-                                break;
-                            default:
-                                break;
-                        }
+                if (!textarea_typing) {
+                    switch (event.keyCode) {
+                        case 32:
+                            togglePlayPause();
+                            break;
+                        case 70:
+                            if (1328 >= video.offsetWidth) {
+                                openFullscreen()
+                            } else {
+                                closeFullscreen()
+                            }
+                            break;
+                        case 77:
+                            mute();
+                            break;
+                        case 37:
+                            video.currentTime = video.currentTime - 5;
+                            break;
+                        case 38:
+                            if (video.volume >= 0.9) {
+                                video.volume = 1;
+                            } else {
+                                video.volume = video.volume + 0.1;
+                            }
+                            volume_slider.value = video.volume * 100;
+                            volumeIcon();
+                            break;
+                        case 39:
+                            video.currentTime = video.currentTime + 5;
+                            break;
+                        case 40:
+                            if (video.volume <= 0.1) {
+                                video.volume = 0;
+                            } else {
+                                video.volume = video.volume - 0.1;
+                            }
+                            volume_slider.value = video.volume * 100;
+                            volumeIcon();
+                            break;
+                        default:
+                            break;
                     }
                 }
             });
-        }
+        },
     }
 </script>
 
