@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('user', 'UserController');
 Route::get('course/{id}', 'UserController@course');
+Route::post('course', 'UserController@leaveCourse');
 Route::get('time/{id}', 'UserController@time');
 Route::post('login', 'LoginController@login');
 
