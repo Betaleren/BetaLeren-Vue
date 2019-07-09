@@ -48,6 +48,8 @@
             let th1s = this;
             let cookie_timer = 10 * 365 * 24 * 60 * 60 * 1000;
             let value = "; " + document.cookie;
+            let volume;
+
             let no_select = document.querySelector('#video');
             let screen = document.querySelector('#video_play');
             let video = document.querySelector('#video_player');
@@ -73,7 +75,11 @@
 
             function getCookieVolume() {
                 let parts = value.split("; volume=");
-                if (parts.length === 2) return parts.pop().split(";").shift();
+                if (parts.length === 2) {
+                    volume = parts.pop().split(";").shift();
+                }
+
+                return volume;
             }
 
             if (getCookieVolume()){
@@ -225,7 +231,11 @@
                     document.cookie = "mute=" + true + ";path=/;expires=" + cookie_timer;
                 } else {
                     video.muted = false;
-                    volume_slider.value = getCookieVolume() * 100;
+                    if (volume * 100 > 0) {
+                        volume_slider.value = volume * 100;
+                    } else {
+                        volume_slider.value = 10;
+                    }
                     document.cookie = "mute=;path=/;expires=0";
                     volumeIcon();
                 }
@@ -248,10 +258,14 @@
                     }
                     if (volume_slider.value <= 0) {
                         volume_button.innerHTML = "<i class='fas fa-volume-mute'></i>";
+                        mute()
                     }
 
                     video.volume = volume_slider.value / 100;
+                    volume = volume_slider.value / 100;
                     document.cookie = "volume=" + video.volume.toFixed(2) + ";path=/;expires=" + cookie_timer;
+                } else {
+
                 }
             }
 

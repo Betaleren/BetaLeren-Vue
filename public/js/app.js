@@ -2717,6 +2717,7 @@ __webpack_require__.r(__webpack_exports__);
     var th1s = this;
     var cookie_timer = 10 * 365 * 24 * 60 * 60 * 1000;
     var value = "; " + document.cookie;
+    var volume;
     var no_select = document.querySelector('#video');
     var screen = document.querySelector('#video_play');
     var video = document.querySelector('#video_player');
@@ -2740,7 +2741,12 @@ __webpack_require__.r(__webpack_exports__);
 
     function getCookieVolume() {
       var parts = value.split("; volume=");
-      if (parts.length === 2) return parts.pop().split(";").shift();
+
+      if (parts.length === 2) {
+        volume = parts.pop().split(";").shift();
+      }
+
+      return volume;
     }
 
     if (getCookieVolume()) {
@@ -2894,7 +2900,13 @@ __webpack_require__.r(__webpack_exports__);
         document.cookie = "mute=" + true + ";path=/;expires=" + cookie_timer;
       } else {
         video.muted = false;
-        volume_slider.value = getCookieVolume() * 100;
+
+        if (volume * 100 > 0) {
+          volume_slider.value = volume * 100;
+        } else {
+          volume_slider.value = 10;
+        }
+
         document.cookie = "mute=;path=/;expires=0";
         volumeIcon();
       }
@@ -2920,11 +2932,13 @@ __webpack_require__.r(__webpack_exports__);
 
         if (volume_slider.value <= 0) {
           volume_button.innerHTML = "<i class='fas fa-volume-mute'></i>";
+          mute();
         }
 
         video.volume = volume_slider.value / 100;
+        volume = volume_slider.value / 100;
         document.cookie = "volume=" + video.volume.toFixed(2) + ";path=/;expires=" + cookie_timer;
-      }
+      } else {}
     }
 
     volumeIcon();
@@ -57677,8 +57691,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Web-Development\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Web-Development\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\pmhub\Documents\GitHub\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\pmhub\Documents\GitHub\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
