@@ -11431,22 +11431,33 @@ a.text-dark:focus {
 }
 
 #summary p.collapse:not(.show) {
-  height: 42px !important;
+  max-height: 64px !important;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
 #summary p.collapsing {
-  min-height: 42px !important;
+  min-height: 63px !important;
 }
 
-#summary a.collapsed:after {
+#summary a:not(.hidden).collapsed:after {
   content: "+ Read More";
 }
 
-#summary a:not(.collapsed):after {
+#summary a:not(.hidden):not(.collapsed):after {
   content: "- Read Less";
+}
+
+.no_resize {
+  resize: none !important;
+}
+
+.text-muted-darker {
+  color: #3b4044 !important;
+}
+
+.text-muted-lighter {
+  color: #a0a6ac !important;
 }
 

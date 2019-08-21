@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="w-xl-400 p-0 w--lg-100 pl-xl-3">
-                <div id="course_list"  style="height: 747px">
+                <div id="course_list" style="height: 738.4px">
                     <VideoListCourse></VideoListCourse>
                 </div>
                 <div>
@@ -66,12 +66,62 @@
             let duration_time = document.querySelector('#duration_time');
             let fullscreen = document.querySelector('#fullscreen');
             let course_list = document.querySelector('#course_list');
-            // let share_link = document.querySelector('#video_share_link');
-            // let share_button = document.querySelector('#video_share_button');
-            // let share_time = document.querySelector('#video_share_time');
-            // let share_time_button = document.querySelector('#video_share_time_button');
-            // let textarea = document.querySelector('textarea');
+            let share_button = document.querySelector('#video_share_button');
+            let share_link = document.querySelector('#video_share_link');
+            let share_time_button = document.querySelector('#video_share_time_button');
+            let share_copy_button = document.querySelector('#video_share_copy_button');
+            document.querySelectorAll('textarea').forEach(typing);
 
+
+            function getAllUrlParams(url) {
+                let queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+                let obj = {};
+
+                if (queryString) {
+                    queryString = queryString.split('#')[0];
+                    let arr = queryString.split('&');
+
+                    for (let i = 0; i < arr.length; i++) {
+                        let a = arr[i].split('=');
+                        let paramName = a[0];
+                        let paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+
+                        paramName = paramName.toLowerCase();
+                        if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
+
+                        if (paramName.match(/\[(\d+)?\]$/)) {
+                            let key = paramName.replace(/\[(\d+)?\]/, '');
+                            if (!obj[key]) obj[key] = [];
+
+                            if (paramName.match(/\[\d+\]$/)) {
+                                let index = /\[(\d+)\]/.exec(paramName)[1];
+                                obj[key][index] = paramValue;
+                            } else {
+                                obj[key].push(paramValue);
+                            }
+                        } else {
+                            if (!obj[paramName]) {
+                                obj[paramName] = paramValue;
+                            } else if (obj[paramName] && typeof obj[paramName] === 'string'){
+                                obj[paramName] = [obj[paramName]];
+                                obj[paramName].push(paramValue);
+                            } else {
+                                obj[paramName].push(paramValue);
+                            }
+                        }
+                    }
+                }
+
+                return obj;
+            }
+            
+            function videoTime() {
+                if (getAllUrlParams().time) {
+                    video.currentTime = getAllUrlParams().time;
+                }
+            }
+
+            videoTime();
 
             function getCookieVolume() {
                 let parts = value.split("; volume=");
@@ -194,8 +244,10 @@
             });
 
             function noScroll(e){
-                if(e.keyCode === 32 || e.keyCode === 38 || e.keyCode === 40 ) {
-                    e.preventDefault();
+                if (!textarea_typing){
+                    if(e.keyCode === 32 || e.keyCode === 38 || e.keyCode === 40 ) {
+                        e.preventDefault();
+                    }
                 }
             }
 
@@ -245,6 +297,8 @@
                 mute()
             };
 
+            let volume_change = false;
+
             function volumeIcon() {
                 if (!video.muted) {
                     if (volume_slider.value > 66) {
@@ -265,14 +319,22 @@
                     volume = volume_slider.value / 100;
                     document.cookie = "volume=" + video.volume.toFixed(2) + ";path=/;expires=" + cookie_timer;
                 } else {
-
+                    if (volume_change) {
+                        if (video.muted){
+                            mute()
+                        }
+                        volume_change = false;
+                    }
                 }
             }
 
             volumeIcon();
 
-
-            volume_slider.addEventListener("change", volumeIcon);
+            volume_slider.addEventListener("change",  function () {
+                volume_change = true;
+                volume = volume_slider.value / 100;
+                volumeIcon();
+            });
 
             function openFullscreen() {
                 if (screen.requestFullscreen) {
@@ -339,42 +401,42 @@
                 }
             });
 
-            let share = false;
-            // share_button.addEventListener('click', function () {
-            //     share_link.value = window.location.href.match(/^.+video=\d+/)[0];
-            //     if (!share) {
-            //         share_link.style.display = 'block';
-            //         share_time.style.display = 'block';
-            //         share_link.select();
-            //         document.execCommand('copy');
-            //         share = true;
-            //         share_time_button.addEventListener('click', function () {
-            //             if (share_time_button.checked === true){
-            //                 let video_time = video.currentTime.toFixed(0);
-            //                 share_link.value = window.location.href.match(/^.+video=\d+/)[0] + '&time=' + video_time;
-            //                 share_link.select();
-            //                 document.execCommand('copy');
-            //             } else {
-            //                 share_link.value = window.location.href.match(/^.+video=\d+/)[0];
-            //                 share_link.select();
-            //                 document.execCommand('copy');
-            //             }
-            //         });
-            //     } else {
-            //         share_link.style.display = 'none';
-            //         share_time.style.display = 'none';
-            //         share = false;
-            //     }
-            // });
+
+            function shareTime() {
+                setTimeout(function () {
+                    if (share_time_button.children[0].checked === true){
+                        let video_time = video.currentTime.toFixed(0);
+                        share_link.value = window.location.href.match(/^.+video=\d+/)[0] + '&time=' + video_time;
+                    } else {
+                        share_link.value = window.location.href.match(/^.+video=\d+/)[0];
+                    }
+                }, 250);
+            }
+
+            share_button.addEventListener('click', function () {
+                $('#share').modal('show');
+                share_link.value = window.location.href.match(/^.+video=\d+/)[0];
+                shareTime();
+            });
+
+            share_time_button.addEventListener('click', shareTime);
+
+            share_copy_button.addEventListener('click', function () {
+                share_link.select();
+                document.execCommand('copy');
+            });
 
             let textarea_typing = false;
-            // textarea.addEventListener('focusin', function () {
-            //     textarea_typing = true
-            // });
-            //
-            // textarea.addEventListener('focusout', function () {
-            //     textarea_typing = false
-            // });
+
+            function typing(element) {
+                element.addEventListener('focusin', function () {
+                    textarea_typing = true
+                });
+
+                element.addEventListener('focusout', function () {
+                    textarea_typing = false
+                });
+            }
 
             window.addEventListener('keyup', function (event) {
                 if (!textarea_typing) {
@@ -402,7 +464,8 @@
                                 video.volume = video.volume + 0.1;
                             }
                             volume_slider.value = video.volume * 100;
-                            volumeIcon();
+                                volume_change = true;
+                                volumeIcon();
                             break;
                         case 39:
                             video.currentTime = video.currentTime + 5;
@@ -414,6 +477,7 @@
                                 video.volume = video.volume - 0.1;
                             }
                             volume_slider.value = video.volume * 100;
+                            volume_change = true;
                             volumeIcon();
                             break;
                         default:

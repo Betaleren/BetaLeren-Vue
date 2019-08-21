@@ -5,7 +5,7 @@
                 <p class="card-text text">Title</p>
             </div>
             <div class="list-group card-body p-0 overflow-auto" style="scroll-behavior: smooth">
-                <router-link id="count" class="list-group-item list-group-item-action bg-transparent rounded-0 border-0 px-0 py-1 text-decoration-none" :to="{query: { test: video.id }}" v-for="video in videos" :key="video.id">
+                <router-link id="count" class="list-group-item list-group-item-action bg-transparent rounded-0 border-0 px-0 py-1 text-decoration-none" :to="{query: { video: video.id }}" v-for="video in videos" :key="video.id">
                     <div class="row m-0">
                         <div class="d-flex flex-row align-items-center px-1">
                             <p class="counter text-muted m-0 text-center" style="min-width: 30px"></p>

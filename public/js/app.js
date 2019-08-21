@@ -2797,11 +2797,61 @@ __webpack_require__.r(__webpack_exports__);
     var current_time = document.querySelector('#current_time');
     var duration_time = document.querySelector('#duration_time');
     var fullscreen = document.querySelector('#fullscreen');
-    var course_list = document.querySelector('#course_list'); // let share_link = document.querySelector('#video_share_link');
-    // let share_button = document.querySelector('#video_share_button');
-    // let share_time = document.querySelector('#video_share_time');
-    // let share_time_button = document.querySelector('#video_share_time_button');
-    // let textarea = document.querySelector('textarea');
+    var course_list = document.querySelector('#course_list');
+    var share_button = document.querySelector('#video_share_button');
+    var share_link = document.querySelector('#video_share_link');
+    var share_time_button = document.querySelector('#video_share_time_button');
+    var share_copy_button = document.querySelector('#video_share_copy_button');
+    document.querySelectorAll('textarea').forEach(typing);
+
+    function getAllUrlParams(url) {
+      var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+      var obj = {};
+
+      if (queryString) {
+        queryString = queryString.split('#')[0];
+        var arr = queryString.split('&');
+
+        for (var i = 0; i < arr.length; i++) {
+          var a = arr[i].split('=');
+          var paramName = a[0];
+          var paramValue = typeof a[1] === 'undefined' ? true : a[1];
+          paramName = paramName.toLowerCase();
+          if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
+
+          if (paramName.match(/\[(\d+)?\]$/)) {
+            var key = paramName.replace(/\[(\d+)?\]/, '');
+            if (!obj[key]) obj[key] = [];
+
+            if (paramName.match(/\[\d+\]$/)) {
+              var index = /\[(\d+)\]/.exec(paramName)[1];
+              obj[key][index] = paramValue;
+            } else {
+              obj[key].push(paramValue);
+            }
+          } else {
+            if (!obj[paramName]) {
+              obj[paramName] = paramValue;
+            } else if (obj[paramName] && typeof obj[paramName] === 'string') {
+              obj[paramName] = [obj[paramName]];
+              obj[paramName].push(paramValue);
+            } else {
+              obj[paramName].push(paramValue);
+            }
+          }
+        }
+      }
+
+      return obj;
+    }
+
+    function videoTime() {
+      if (getAllUrlParams().time) {
+        video.currentTime = getAllUrlParams().time;
+      }
+    }
+
+    videoTime();
 
     function getCookieVolume() {
       var parts = value.split("; volume=");
@@ -2927,8 +2977,10 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     function noScroll(e) {
-      if (e.keyCode === 32 || e.keyCode === 38 || e.keyCode === 40) {
-        e.preventDefault();
+      if (!textarea_typing) {
+        if (e.keyCode === 32 || e.keyCode === 38 || e.keyCode === 40) {
+          e.preventDefault();
+        }
       }
     }
 
@@ -2980,6 +3032,8 @@ __webpack_require__.r(__webpack_exports__);
       mute();
     };
 
+    var volume_change = false;
+
     function volumeIcon() {
       if (!video.muted) {
         if (volume_slider.value > 66) {
@@ -3002,11 +3056,23 @@ __webpack_require__.r(__webpack_exports__);
         video.volume = volume_slider.value / 100;
         volume = volume_slider.value / 100;
         document.cookie = "volume=" + video.volume.toFixed(2) + ";path=/;expires=" + cookie_timer;
-      } else {}
+      } else {
+        if (volume_change) {
+          if (video.muted) {
+            mute();
+          }
+
+          volume_change = false;
+        }
+      }
     }
 
     volumeIcon();
-    volume_slider.addEventListener("change", volumeIcon);
+    volume_slider.addEventListener("change", function () {
+      volume_change = true;
+      volume = volume_slider.value / 100;
+      volumeIcon();
+    });
 
     function openFullscreen() {
       if (screen.requestFullscreen) {
@@ -3074,40 +3140,38 @@ __webpack_require__.r(__webpack_exports__);
         document.body.style.cursor = '';
       }
     });
-    var share = false; // share_button.addEventListener('click', function () {
-    //     share_link.value = window.location.href.match(/^.+video=\d+/)[0];
-    //     if (!share) {
-    //         share_link.style.display = 'block';
-    //         share_time.style.display = 'block';
-    //         share_link.select();
-    //         document.execCommand('copy');
-    //         share = true;
-    //         share_time_button.addEventListener('click', function () {
-    //             if (share_time_button.checked === true){
-    //                 let video_time = video.currentTime.toFixed(0);
-    //                 share_link.value = window.location.href.match(/^.+video=\d+/)[0] + '&time=' + video_time;
-    //                 share_link.select();
-    //                 document.execCommand('copy');
-    //             } else {
-    //                 share_link.value = window.location.href.match(/^.+video=\d+/)[0];
-    //                 share_link.select();
-    //                 document.execCommand('copy');
-    //             }
-    //         });
-    //     } else {
-    //         share_link.style.display = 'none';
-    //         share_time.style.display = 'none';
-    //         share = false;
-    //     }
-    // });
 
-    var textarea_typing = false; // textarea.addEventListener('focusin', function () {
-    //     textarea_typing = true
-    // });
-    //
-    // textarea.addEventListener('focusout', function () {
-    //     textarea_typing = false
-    // });
+    function shareTime() {
+      setTimeout(function () {
+        if (share_time_button.children[0].checked === true) {
+          var video_time = video.currentTime.toFixed(0);
+          share_link.value = window.location.href.match(/^.+video=\d+/)[0] + '&time=' + video_time;
+        } else {
+          share_link.value = window.location.href.match(/^.+video=\d+/)[0];
+        }
+      }, 250);
+    }
+
+    share_button.addEventListener('click', function () {
+      $('#share').modal('show');
+      share_link.value = window.location.href.match(/^.+video=\d+/)[0];
+      shareTime();
+    });
+    share_time_button.addEventListener('click', shareTime);
+    share_copy_button.addEventListener('click', function () {
+      share_link.select();
+      document.execCommand('copy');
+    });
+    var textarea_typing = false;
+
+    function typing(element) {
+      element.addEventListener('focusin', function () {
+        textarea_typing = true;
+      });
+      element.addEventListener('focusout', function () {
+        textarea_typing = false;
+      });
+    }
 
     window.addEventListener('keyup', function (event) {
       if (!textarea_typing) {
@@ -3141,6 +3205,7 @@ __webpack_require__.r(__webpack_exports__);
             }
 
             volume_slider.value = video.volume * 100;
+            volume_change = true;
             volumeIcon();
             break;
 
@@ -3156,6 +3221,7 @@ __webpack_require__.r(__webpack_exports__);
             }
 
             volume_slider.value = video.volume * 100;
+            volume_change = true;
             volumeIcon();
             break;
 
@@ -3219,6 +3285,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Video-Commands",
   data: function data() {
@@ -3236,8 +3336,6 @@ __webpack_require__.r(__webpack_exports__);
         id: '2',
         comments: [{
           id: '1'
-        }, {
-          id: '2'
         }]
       }, {
         id: '3',
@@ -3246,8 +3344,55 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           id: '2'
         }]
+      }, {
+        id: '4',
+        comments: []
       }]
     };
+  },
+  mounted: function mounted() {
+    this.addAutoResize();
+    setTimeout(this.textExpand, 1000);
+    window.addEventListener("resize", this.textExpand);
+  },
+  methods: {
+    test: function test() {
+      setTimeout(this.textExpand, 250);
+    },
+    textExpand: function textExpand() {
+      document.querySelectorAll('[data-expand]').forEach(function (element) {
+        var height = element.children[0].clientHeight;
+        var event = element.children[1];
+
+        if (height > 63) {
+          event.classList.remove('hidden');
+        } else {
+          event.classList.add('hidden');
+        }
+      });
+    },
+    addAutoResize: function addAutoResize() {
+      document.querySelectorAll('[data-autoresize]').forEach(function (element) {
+        element.style.boxSizing = 'border-box';
+        var offset = element.offsetHeight - element.clientHeight;
+        document.addEventListener('input', function (event) {
+          event.target.style.height = 'auto';
+          event.target.style.height = event.target.scrollHeight + offset + 'px';
+        });
+        element.removeAttribute('data-autoresize');
+      });
+    },
+    openSend: function openSend(a) {
+      $(a).addClass('show');
+    },
+    closeSend: function closeSend(a) {
+      $(a).removeClass('show');
+    },
+    closeReply: function closeReply(a) {
+      Array.from($(a)).forEach(function (obj) {
+        obj.open = false;
+      });
+    }
   }
 });
 
@@ -3300,6 +3445,35 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -18564,7 +18738,7 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -18575,7 +18749,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.14';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -21234,16 +21408,10 @@ return jQuery;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -22167,8 +22335,8 @@ return jQuery;
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -23985,7 +24153,7 @@ return jQuery;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -25168,7 +25336,7 @@ return jQuery;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -25176,6 +25344,10 @@ return jQuery;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -28976,6 +29148,7 @@ return jQuery;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -33362,9 +33535,12 @@ return jQuery;
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -33397,7 +33573,9 @@ return jQuery;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -35602,10 +35780,11 @@ return jQuery;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -40247,7 +40426,7 @@ var render = function() {
       _c("div", { staticClass: "w-xl-400 p-0 w--lg-100 pl-xl-3" }, [
         _c(
           "div",
-          { staticStyle: { height: "747px" }, attrs: { id: "course_list" } },
+          { staticStyle: { height: "738.4px" }, attrs: { id: "course_list" } },
           [_c("VideoListCourse")],
           1
         ),
@@ -40297,10 +40476,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.comments, function(comment_1) {
-      return _c(
+    [
+      _c(
         "div",
-        { key: comment_1.id, staticClass: "media" },
+        { staticClass: "media mb-3" },
         [
           _c("router-link", { attrs: { to: "/profile?u_id=21" } }, [
             _c("img", {
@@ -40308,143 +40487,387 @@ var render = function() {
               attrs: {
                 src: "/img/Profile/default-avatar.png",
                 alt: "picture",
-                width: "64",
-                height: "64"
+                width: "40",
+                height: "40"
               }
             })
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "media-body" },
-            [
-              _c(
-                "div",
-                { staticClass: "row m-0", staticStyle: { height: "64px" } },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass:
-                        "align-self-center text-decoration-none text-muted",
-                      attrs: { to: "/profile?u_id=21" }
+          _c("div", { staticClass: "media-body" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.kanker,
+                        expression: "kanker"
+                      }
+                    ],
+                    staticClass:
+                      "form-control bg-transparent border-top-0 border-left-0 border-right-0 rounded-0 no_resize overflow-hidden",
+                    attrs: {
+                      rows: "1",
+                      placeholder: "Comment",
+                      "data-autoresize": ""
                     },
-                    [_c("h5", { staticClass: "m-0" }, [_vm._v("Name")])]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { attrs: { id: "summary" } }, [
+                    domProps: { value: _vm.kanker },
+                    on: {
+                      click: function($event) {
+                        return _vm.openSend(".comment_send")
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.kanker = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
                 _c(
-                  "p",
+                  "div",
+                  { staticClass: "form-group collapse", class: "comment_send" },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-primary mx-1 rounded-0 float-right",
+                        attrs: { type: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.closeSend(".comment_send")
+                          }
+                        }
+                      },
+                      [_vm._v("Send")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn bg-light mx-1 rounded-0 float-right",
+                        attrs: { type: "reset" },
+                        on: {
+                          click: function($event) {
+                            return _vm.closeSend(".comment_send")
+                          }
+                        }
+                      },
+                      [_vm._v("Cancel")]
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.comments, function(comment_1) {
+        return _c(
+          "div",
+          { key: comment_1.id, staticClass: "media" },
+          [
+            _c("router-link", { attrs: { to: "/profile?u_id=21" } }, [
+              _c("img", {
+                staticClass: "mr-3 rounded-circle",
+                attrs: {
+                  src: "/img/Profile/default-avatar.png",
+                  alt: "picture",
+                  width: "40",
+                  height: "40"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "media-body mb-3" },
+              [
+                _c(
+                  "router-link",
                   {
-                    staticClass: "collapse text-muted",
-                    attrs: { id: "comment_" + comment_1.id }
+                    staticClass: "text-decoration-none text-muted-darker",
+                    attrs: { to: "/profile?u_id=21" }
+                  },
+                  [_c("h6", { staticClass: "m-0" }, [_vm._v("Name")])]
+                ),
+                _vm._v(" "),
+                _c("div", { attrs: { id: "summary", "data-expand": "" } }, [
+                  _c(
+                    "p",
+                    {
+                      staticClass: "collapse my-1 text-muted",
+                      attrs: { id: "comment_" + comment_1.id }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porttitor maximus laoreet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("a", {
+                    staticClass:
+                      "collapsed text-decoration-none text-muted hidden",
+                    attrs: {
+                      "data-toggle": "collapse",
+                      href: "#comment_" + comment_1.id,
+                      "aria-expanded": "false",
+                      "aria-controls": "collapseSummary"
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "details",
+                  {
+                    staticClass: "mt-1",
+                    class: "comment_reply_" + comment_1.id
                   },
                   [
-                    _vm._v(
-                      "\n                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porttitor maximus laoreet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Suspendisse venenatis sollicitudin erat in gravida. Sed eget nisl tristique, commodo lectus sit amet, vulputate sem. Cras porttitor lorem ipsum, sit amet iaculis massa feugiat vitae. Curabitur sapien odio, ullamcorper tincidunt interdum vitae, vestibulum eu neque. Nam leo massa, fringilla eget mauris feugiat, auctor suscipit justo.\n                "
+                    _c(
+                      "summary",
+                      {
+                        staticClass: "list-unstyled text-muted-darker no_select"
+                      },
+                      [_vm._v("Reply")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "media mb-3" },
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/profile?u_id=21" } },
+                          [
+                            _c("img", {
+                              staticClass: "mr-3 rounded-circle",
+                              attrs: {
+                                src: "/img/Profile/default-avatar.png",
+                                alt: "picture",
+                                width: "24",
+                                height: "24"
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "media-body" }, [
+                          _c(
+                            "form",
+                            {
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                }
+                              }
+                            },
+                            [
+                              _vm._m(0, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-primary mx-1 rounded-0 float-right",
+                                    attrs: { type: "submit" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.closeReply(
+                                          ".comment_reply_" + comment_1.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Send")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn bg-light mx-1 rounded-0 float-right",
+                                    attrs: { type: "reset" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.closeReply(
+                                          ".comment_reply_" + comment_1.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Cancel")]
+                                )
+                              ])
+                            ]
+                          )
+                        ])
+                      ],
+                      1
                     )
                   ]
                 ),
                 _vm._v(" "),
-                _c("a", {
-                  staticClass: "collapsed text-decoration-none text-muted",
-                  attrs: {
-                    "data-toggle": "collapse",
-                    href: "#comment_" + comment_1.id,
-                    "aria-expanded": "false",
-                    "aria-controls": "collapseSummary"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _vm._l(comment_1.comments, function(comment_2) {
-                return _c(
-                  "div",
+                _c(
+                  "details",
                   {
-                    key: comment_1.id + "_" + comment_2.id,
-                    staticClass: "media mt-3"
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: comment_1.comments.length !== 0,
+                        expression: "comment_1.comments.length !== 0"
+                      }
+                    ],
+                    staticClass: "mb-1"
                   },
                   [
-                    _c("router-link", { attrs: { to: "/profile?u_id=21" } }, [
-                      _c("img", {
-                        staticClass: "mr-3 rounded-circle",
-                        attrs: {
-                          src: "/img/Profile/default-avatar.png",
-                          alt: "picture",
-                          width: "32",
-                          height: "32"
-                        }
-                      })
-                    ]),
+                    _c(
+                      "summary",
+                      {
+                        staticClass: "text-muted-darker no_select",
+                        on: { click: _vm.test }
+                      },
+                      [_vm._v("Answers")]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "media-body" }, [
-                      _c(
+                    _vm._l(comment_1.comments, function(comment_2) {
+                      return _c(
                         "div",
                         {
-                          staticClass: "row m-0",
-                          staticStyle: { height: "32px" }
+                          key: comment_1.id + "_" + comment_2.id,
+                          staticClass: "media mt-3"
                         },
                         [
                           _c(
                             "router-link",
-                            {
-                              staticClass:
-                                "align-self-center text-decoration-none text-muted",
-                              attrs: { to: "/profile?u_id=21" }
-                            },
-                            [_c("h6", { staticClass: "m-0" }, [_vm._v("Name")])]
+                            { attrs: { to: "/profile?u_id=21" } },
+                            [
+                              _c("img", {
+                                staticClass: "mr-3 rounded-circle",
+                                attrs: {
+                                  src: "/img/Profile/default-avatar.png",
+                                  alt: "picture",
+                                  width: "24",
+                                  height: "24"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "media-body" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "text-decoration-none text-muted-darker",
+                                  attrs: { to: "/profile?u_id=21" }
+                                },
+                                [
+                                  _c("h6", { staticClass: "m-0" }, [
+                                    _vm._v("Name")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { attrs: { id: "summary", "data-expand": "" } },
+                                [
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "collapse my-1 text-muted",
+                                      attrs: {
+                                        id:
+                                          "comment_" +
+                                          comment_1.id +
+                                          "_" +
+                                          comment_2.id
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.\n                            "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("a", {
+                                    staticClass:
+                                      "collapsed text-decoration-none text-muted hidden",
+                                    attrs: {
+                                      "data-toggle": "collapse",
+                                      href:
+                                        "#comment_" +
+                                        comment_1.id +
+                                        "_" +
+                                        comment_2.id,
+                                      "aria-expanded": "false",
+                                      "aria-controls": "collapseSummary"
+                                    }
+                                  })
+                                ]
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { attrs: { id: "summary" } }, [
-                        _c(
-                          "p",
-                          {
-                            staticClass: "collapse text-muted",
-                            attrs: {
-                              id: "comment_" + comment_1.id + "_" + comment_2.id
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porttitor maximus laoreet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Suspendisse venenatis sollicitudin erat in gravida. Sed eget nisl tristique, commodo lectus sit amet, vulputate sem. Cras porttitor lorem ipsum, sit amet iaculis massa feugiat vitae. Curabitur sapien odio, ullamcorper tincidunt interdum vitae, vestibulum eu neque. Nam leo massa, fringilla eget mauris feugiat, auctor suscipit justo.\n                        "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("a", {
-                          staticClass:
-                            "collapsed text-decoration-none text-muted",
-                          attrs: {
-                            "data-toggle": "collapse",
-                            href:
-                              "#comment_" + comment_1.id + "_" + comment_2.id,
-                            "aria-expanded": "false",
-                            "aria-controls": "collapseSummary"
-                          }
-                        })
-                      ])
-                    ])
+                      )
+                    })
                   ],
-                  1
+                  2
                 )
-              })
-            ],
-            2
-          )
-        ],
-        1
-      )
-    }),
-    0
+              ],
+              1
+            )
+          ],
+          1
+        )
+      })
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("textarea", {
+        staticClass:
+          "form-control bg-transparent border-top-0 border-left-0 border-right-0 rounded-0 no_resize overflow-hidden",
+        attrs: {
+          rows: "1",
+          placeholder: "Reply to the comment",
+          "data-autoresize": ""
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -40471,15 +40894,7 @@ var render = function() {
       attrs: { id: "video_player", src: "video/Lost_Control.mp4" }
     }),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "div",
       {
         staticStyle: { transform: "translateY(0)" },
@@ -40491,7 +40906,7 @@ var staticRenderFns = [
           {
             attrs: {
               id: "video_controls_seek_bar",
-              title: "Time +5 sec (&#8594), -5 sec (&#8592)"
+              title: "Time -5 sec (\u2190), +5 sec (\u2192)"
             }
           },
           [
@@ -40522,34 +40937,20 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("div", { attrs: { id: "video_controls_buttons" } }, [
-          _c(
-            "button",
-            {
-              staticClass: "button",
-              attrs: { id: "play_pause", title: "Play (Space)" }
-            },
-            [_c("i", { staticClass: "fas fa-play" })]
-          ),
+          _vm._m(0),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "button",
-              attrs: { id: "volume_button", title: "Mute (M)" }
-            },
-            [_c("i", { staticClass: "fas fa-volume-up" })]
-          ),
+          _vm._m(1),
           _vm._v(" "),
           _c("div", { attrs: { id: "volume" } }, [
             _c("input", {
               attrs: {
-                id: "volume_slider",
                 type: "range",
+                id: "volume_slider",
                 min: "0",
                 max: "100",
                 value: "100",
                 step: "1",
-                title: "Volume up (&#8593;), down (&#8595;)"
+                title: "Volume up (\u2191;), down (\u2193;)"
               }
             })
           ]),
@@ -40562,21 +40963,55 @@ var staticRenderFns = [
             _vm._v("00:00")
           ]),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "button",
-              staticStyle: { "margin-left": "auto" },
-              attrs: { id: "fullscreen" }
-            },
-            [
-              _c("i", {
-                staticClass: "fas fa-expand",
-                attrs: { title: "Fullscreen (F)" }
-              })
-            ]
-          )
+          _vm._m(2)
         ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "button",
+        attrs: { id: "play_pause", title: "Play (Space)" }
+      },
+      [_c("i", { staticClass: "fas fa-play" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "button",
+        attrs: { id: "volume_button", title: "Mute (M)" }
+      },
+      [_c("i", { staticClass: "fas fa-volume-up" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "button",
+        staticStyle: { "margin-left": "auto" },
+        attrs: { id: "fullscreen" }
+      },
+      [
+        _c("i", {
+          staticClass: "fas fa-expand",
+          attrs: { title: "Fullscreen (F)" }
+        })
       ]
     )
   }
@@ -40605,6 +41040,8 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c("div", { staticClass: "dropdown-divider line" }),
     _vm._v(" "),
     _c(
@@ -40617,8 +41054,8 @@ var render = function() {
             attrs: {
               src: "/img/Profile/default-avatar.png",
               alt: "picture",
-              width: "64",
-              height: "64"
+              width: "48",
+              height: "48"
             }
           })
         ]),
@@ -40626,7 +41063,7 @@ var render = function() {
         _c("div", { staticClass: "media-body" }, [
           _c(
             "div",
-            { staticClass: "row m-0", staticStyle: { height: "64px" } },
+            { staticClass: "row m-0", staticStyle: { height: "48px" } },
             [
               _c(
                 "div",
@@ -40635,17 +41072,15 @@ var render = function() {
                   _c(
                     "router-link",
                     {
-                      staticClass: "text-decoration-none text-muted",
+                      staticClass: "text-decoration-none text-muted-darker",
                       attrs: { to: "/profile?u_id=21" }
                     },
-                    [
-                      _c("h5", { staticClass: "m-0 text-muted" }, [
-                        _vm._v("Uploader")
-                      ])
-                    ]
+                    [_c("h6", { staticClass: "m-0" }, [_vm._v("Uploader")])]
                   ),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c("small", { staticClass: "text-muted-lighter" }, [
+                    _vm._v("Upload date")
+                  ])
                 ],
                 1
               )
@@ -40666,27 +41101,141 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pt-3" }, [
-      _c("h4", { staticClass: "text-muted" }, [_vm._v("Tilte")])
+    return _c("div", { staticClass: "pt-3 px-15 row" }, [
+      _c("h4", { staticClass: "text-muted m-0" }, [_vm._v("Tilte")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn bg-transparent p-0 ml-auto text-muted",
+          attrs: { id: "video_share_button" }
+        },
+        [_c("i", { staticClass: "far fa-share-square pr-1" }), _vm._v("Share")]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "m-0" }, [
-      _c("small", { staticClass: "text-muted" }, [_vm._v("Upload date")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "share",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content rounded-0" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v("Share video links")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "input-group mb-3 bg-light" }, [
+                  _c("input", {
+                    staticClass:
+                      "form-control bg-transparent rounded-0 border-0",
+                    attrs: {
+                      type: "text",
+                      id: "video_share_link",
+                      readonly: "",
+                      placeholder: "Share link",
+                      "aria-label": "Recipient's username",
+                      "aria-describedby": "basic-addon2"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn bg-transparent rounded-0 border-0",
+                        attrs: { id: "video_share_copy_button", type: "button" }
+                      },
+                      [_vm._v("Copy")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "row justify-content-between px-15" },
+                  [
+                    _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v("Share with")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group-toggle",
+                        attrs: { "data-toggle": "buttons" }
+                      },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "btn btn-secondary rounded-0",
+                            staticStyle: { cursor: "pointer" },
+                            attrs: { id: "video_share_time_button" }
+                          },
+                          [
+                            _c("input", { attrs: { type: "checkbox" } }),
+                            _vm._v(" Time\n                            ")
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "summary" } }, [
+    return _c("div", { attrs: { id: "summary", "data-expand": "" } }, [
       _c(
         "p",
         {
-          staticClass: "collapse text-muted",
+          staticClass: "collapse my-1 text-muted",
           attrs: { id: "collapseSummary" }
         },
         [
@@ -40697,7 +41246,7 @@ var staticRenderFns = [
       ),
       _vm._v(" "),
       _c("a", {
-        staticClass: "collapsed text-decoration-none text-muted",
+        staticClass: "collapsed text-decoration-none text-muted hidden",
         attrs: {
           "data-toggle": "collapse",
           href: "#collapseSummary",
@@ -40746,7 +41295,7 @@ var render = function() {
               key: video.id,
               staticClass:
                 "list-group-item list-group-item-action bg-transparent rounded-0 border-0 px-0 py-1 text-decoration-none",
-              attrs: { id: "count", to: { query: { test: video.id } } }
+              attrs: { id: "count", to: { query: { video: video.id } } }
             },
             [
               _c("div", { staticClass: "row m-0" }, [
@@ -57233,8 +57782,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\pmhub\Documents\GitHub\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\pmhub\Documents\GitHub\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /mnt/d/Web-Development/BetaLeren-Vue/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /mnt/d/Web-Development/BetaLeren-Vue/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

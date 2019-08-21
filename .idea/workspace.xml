@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2e774f0-352d-4d3a-b673-cf8762d86bf0" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
 <<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/resources/js/components/profile/info/Profile-Courses.vue" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/resources/js/components/profile/info/Progress.vue" afterDir="false" />
@@ -18,16 +19,14 @@
       <change afterPath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Controls.vue" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-List-Course.vue" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-List.vue" afterDir="false" />
+=======
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Main.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/video/Video-Commands.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Comments.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/video/Video-List-Course.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Info.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/video/Video.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/video/Video.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/_video.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/_video.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Comments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Comments.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Info.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Info.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
 >>>>>>> Develop-P
     </list>
@@ -57,11 +56,15 @@
     <expand />
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="BetaLeren-Vue" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="701">
               <caret line="175" column="1" selection-start-line="175" selection-start-column="1" selection-end-line="175" selection-end-column="1" />
             </state>
@@ -76,11 +79,18 @@
               <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
               <folding>
                 <element signature="e#2330#2356#0" expanded="true" />
+=======
+            <state relative-caret-position="615">
+              <caret line="58" column="11" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
+              <folding>
+                <element signature="n#style#0;n#label#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/profile/info/Profile-Courses.vue">
           <provider selected="true" editor-type-id="text-editor">
@@ -126,10 +136,21 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
               <caret line="15" selection-start-line="15" selection-end-line="15" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/js/components/video/Video.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="301" column="87" selection-start-line="301" selection-start-column="87" selection-end-line="301" selection-end-column="87" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/js/components/nav-bars/Nav-Bar.vue">
           <provider selected="true" editor-type-id="text-editor">
@@ -143,6 +164,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> Stashed changes
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -159,7 +182,12 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>all</find>
+      <find>pre</find>
+      <find>var</find>
     </findStrings>
+    <replaceStrings>
+      <replace>let</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -201,13 +229,19 @@
         <option value="$PROJECT_DIR$/resources/js/components/video/Video-List-Course.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/video/Video-List.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/video/video-components/Video-List.vue" />
-        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
         <option value="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Controls.vue" />
-        <option value="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Info.vue" />
+        <option value="$PROJECT_DIR$/resources/js/components/video/video-components/Video-List-Course.vue" />
+        <option value="$PROJECT_DIR$/vendor/symfony/var-dumper/Resources/css/htmlDescriptor.css" />
         <option value="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Comments.vue" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/resources/js/components/video/video-components/Video-List-Course.vue" />
         <option value="$PROJECT_DIR$/resources/js/components/video/Video.vue" />
 >>>>>>> Develop-P
+=======
+        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
+        <option value="$PROJECT_DIR$/resources/js/components/video/video-components/Video-Info.vue" />
+        <option value="$PROJECT_DIR$/resources/js/components/video/Video.vue" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -316,6 +350,7 @@
   </component>
 <<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< Updated upstream
     <option name="x" value="-8" />
     <option name="y" value="32" />
     <option name="width" value="1096" />
@@ -327,6 +362,12 @@
     <option name="width" value="974" />
     <option name="height" value="1047" />
 >>>>>>> Develop-P
+=======
+    <option name="x" value="240" />
+    <option name="y" value="170" />
+    <option name="width" value="1440" />
+    <option name="height" value="780" />
+>>>>>>> Stashed changes
   </component>
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
@@ -413,8 +454,36 @@
               <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="js" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+<<<<<<< Updated upstream
               <item name="settings" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="sub-settings" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+=======
+              <item name="authentication" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BetaLeren-Vue" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Web-Development\BetaLeren-Vue" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="js" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="general" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BetaLeren-Vue" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Web-Development\BetaLeren-Vue" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="js" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="nav-bars" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="BetaLeren-Vue" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\Web-Development\BetaLeren-Vue" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="js" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="video" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+>>>>>>> Stashed changes
             </path>
             <path>
               <item name="BetaLeren-Vue" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -484,9 +553,16 @@
     <property name="editor.config.ad.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../almanapp" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+<<<<<<< Updated upstream
     <property name="nodejs_package_manager_path" value="yarn" />
+=======
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+>>>>>>> Stashed changes
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -547,19 +623,30 @@
       <workItem from="1562448983804" duration="143000" />
       <workItem from="1562449144549" duration="99000" />
       <workItem from="1562449264060" duration="228000" />
+<<<<<<< Updated upstream
       <workItem from="1562449525700" duration="60340000" />
 >>>>>>> Develop-P
+=======
+      <workItem from="1562449525700" duration="60940000" />
+      <workItem from="1563315392864" duration="26896000" />
+      <workItem from="1563408550214" duration="37880000" />
+      <workItem from="1563495124175" duration="3726000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="36233000" />
 =======
     <option name="totallyTimeSpent" value="106879000" />
 >>>>>>> Develop-P
+=======
+    <option name="totallyTimeSpent" value="171328000" />
+>>>>>>> Stashed changes
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -569,6 +656,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
     <editor active="true" />
@@ -581,6 +669,14 @@
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.498452" visible="true" weight="0.17324094" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+=======
+    <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836424" visible="true" weight="0.17803837" />
+      <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.5016358" side_tool="true" weight="0.17803837" />
+      <window_info id="Favorites" order="2" show_stripe_button="false" sideWeight="0.5016358" side_tool="true" weight="0.17803837" />
+>>>>>>> Stashed changes
       <window_info id="npm" order="3" sideWeight="0.501548" side_tool="true" weight="0.2596472" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -591,14 +687,21 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3293348" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
+<<<<<<< Updated upstream
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.16793066" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="12" />
+=======
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" weight="0.3293348" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3293348" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.16793893" />
+>>>>>>> Stashed changes
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" weight="0.3290938" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32889125" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.498452" visible="true" weight="0.17329094" />
@@ -681,6 +784,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1422">
@@ -689,6 +793,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/general/register.vue">
+=======
+    <entry file="file://$PROJECT_DIR$/resources/js/components/authentication/Register.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/Main.blade.php">
+>>>>>>> Stashed changes
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="512">
           <caret line="62" column="36" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
@@ -723,6 +837,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -731,6 +846,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/components/Main.vue">
+=======
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php">
+>>>>>>> Stashed changes
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
@@ -748,6 +866,7 @@
     <entry file="file://$PROJECT_DIR$/resources/js/app.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -766,6 +885,8 @@
     <entry file="file://$PROJECT_DIR$/resources/js/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/resources/js/components/nav-bars/Course-Nav.vue" />
     <entry file="file://$PROJECT_DIR$/resources/views/emails/reminder.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
@@ -866,13 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/sass/_variables.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/js/routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="553">
@@ -908,26 +1022,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/general/Profile.vue">
+    <entry file="file://$PROJECT_DIR$/resources/js/components/settings/Settings.vue">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="61">
           <caret line="65" column="59" selection-start-line="65" selection-start-column="59" selection-end-line="65" selection-end-column="59" />
+=======
+        <state relative-caret-position="400">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+>>>>>>> Stashed changes
           <folding>
-            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#fragment#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#fragment#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#h4#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#fragment#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#fragment#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1009#1069#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/settings/Settings.vue">
+    <entry file="file://$PROJECT_DIR$/resources/js/components/video/video-components/Video-List-Course.vue">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="-18">
           <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
           <folding>
             <element signature="e#589#649#0" expanded="true" />
 >>>>>>> Develop-P
+=======
+        <state relative-caret-position="112">
+          <caret line="7" column="158" selection-start-line="7" selection-start-column="158" selection-end-line="7" selection-end-column="158" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#router-link#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#router-link#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/video/video-components/Video-List.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="19" column="8" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#router-link#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>
@@ -954,6 +1091,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/resources/js/components/video/video-components/Video-List.vue">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -972,21 +1110,55 @@
 =======
         <state relative-caret-position="640">
           <caret line="40" column="10" selection-start-line="22" selection-start-column="8" selection-end-line="40" selection-end-column="10" />
+=======
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/var-dumper/Resources/css/htmlDescriptor.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="104" column="17" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/general/Profile.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="752">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+>>>>>>> Stashed changes
           <folding>
-            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#router-link#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#fragment#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#fragment#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#h4#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#fragment#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#hr#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#fragment#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/video/video-components/Video-Info.vue">
+    <entry file="file://$PROJECT_DIR$/node_modules/bootstrap/scss/_input-group.scss">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="112">
           <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
 >>>>>>> Develop-P
           </folding>
+=======
+        <state relative-caret-position="-343">
+          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/authentication/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/nav-bars/Sub-Nav.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
@@ -1019,24 +1191,52 @@
 =======
     <entry file="file://$PROJECT_DIR$/resources/js/components/video/video-components/Video-Comments.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+        <state relative-caret-position="-165">
+          <caret line="52" column="100" lean-forward="true" selection-start-line="52" selection-start-column="100" selection-end-line="52" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< Updated upstream
+    <entry file="file://$PROJECT_DIR$/resources/js/components/video/video-components/Video-List-Course.vue">
+=======
+    <entry file="file://$PROJECT_DIR$/resources/sass/_variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/block.rnc">
+>>>>>>> Stashed changes
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="248" column="16" selection-start-line="248" selection-start-column="16" selection-end-line="248" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="593">
+          <caret line="222" column="19" selection-start-line="222" selection-start-column="19" selection-end-line="222" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/components/video/video-components/Video-Info.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="58" column="11" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/components/video/video-components/Video-List-Course.vue">
+    <entry file="file://$PROJECT_DIR$/resources/js/components/video/Video.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="7" column="158" selection-start-line="7" selection-start-column="158" selection-end-line="7" selection-end-column="158" />
+        <state relative-caret-position="629">
+          <caret line="301" column="87" selection-start-line="301" selection-start-column="87" selection-end-line="301" selection-end-column="87" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#router-link#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#router-link#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1078,5 +1278,20 @@
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
