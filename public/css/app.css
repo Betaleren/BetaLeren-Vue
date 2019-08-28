@@ -11261,26 +11261,6 @@ a.text-dark:focus {
   }
 }
 
-.login-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.container-videos {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.login {
-  height: 100vh;
-}
-
-.clickable {
-  cursor: pointer;
 .container-videos {
   width: 100%;
   margin-right: auto;
