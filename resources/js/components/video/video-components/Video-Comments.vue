@@ -7,7 +7,7 @@
             <div class="media-body">
                 <form @submit.prevent="">
                     <div class="form-group">
-                        <textarea class="form-control bg-transparent border-top-0 border-left-0 border-right-0 rounded-0 no_resize overflow-hidden" rows="1" placeholder="Comment" v-model="kanker" data-autoresize v-on:click="openSend('.comment_send')"></textarea>
+                        <textarea class="form-control bg-transparent border-top-0 border-left-0 border-right-0 rounded-0 no_resize overflow-hidden" rows="1" placeholder="Comment" data-autoresize v-on:click="openSend('.comment_send')"></textarea>
                     </div>
                     <div class="form-group collapse" :class="'comment_send'">
                         <button type="submit" class="btn btn-primary mx-1 rounded-0 float-right" v-on:click="closeSend('.comment_send')">Send</button>
@@ -50,7 +50,7 @@
                     </div>
                 </details>
                 <details class="mb-1" v-show="comment_1.comments.length !== 0">
-                    <summary class="text-muted-darker no_select" v-on:click="test">Answers</summary>
+                    <summary class="text-muted-darker no_select" v-on:click="text">Answers</summary>
                     <div class="media mt-3" v-for="comment_2 in comment_1.comments" :key="comment_1.id + '_' + comment_2.id">
                         <router-link to="/profile?u_id=21">
                             <img :src="'/img/Profile/default-avatar.png'" class="mr-3 rounded-circle" alt="picture" width="24" height="24">
@@ -113,14 +113,14 @@
 
         mounted() {
             this.addAutoResize();
-            setTimeout(this.textExpand, 1000);
+            setTimeout(this.textExpand, 10);
 
             window.addEventListener("resize", this.textExpand);
         },
 
         methods: {
-            test() {
-                setTimeout(this.textExpand, 250);
+            text() {
+                setTimeout(this.textExpand, 10);
             },
 
             textExpand() {
