@@ -53,9 +53,9 @@
                 loggedInUserId: null,
                 time: '',
                 info: {
-                    progress: true,
+                    progress: false,
                     course: false,
-                    repo: false,
+                    repo: true,
                 },
                 previous: 'progress',
                 data : this.$route.query.u_id,

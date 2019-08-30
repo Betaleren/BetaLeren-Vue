@@ -22,5 +22,9 @@ Route::get('course/{id}', 'UserController@course');
 Route::post('course', 'UserController@leaveCourse');
 Route::get('time/{id}', 'UserController@time');
 Route::post('login', 'LoginController@login');
+Route::get('git', 'GitController@index');
+Route::post('git', 'GitController@store');
+Route::get('tokenCheck/{id}', 'GitController@check');
+Route::get('token/{id}', 'GitController@get');
 
 Route::post('register' , 'LoginController@register');
