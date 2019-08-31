@@ -1,75 +1,99 @@
-import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Fragment from 'vue-fragment';
-
-Vue.use(Fragment.Plugin);
-Vue.use(VueRouter);
 
 /*
     pages
 */
-import dashboard from '../js/components/general/Dashboard';
-import settings from '../js/components/settings/Settings';
-import video from '../js/components/video/Video';
-import course from '../js/components/general/Course';
-import register from '../js/components/authentication/register';
-import login from '../js/components/authentication/login';
-import profile_courses from './components/profile/info/Profile-Courses'
-import progress from './components/profile/info/Progress'
+import dashboard from './components/general/Dashboard';
+import settings from './components/settings/Settings';
+import video from './components/video/Video';
+import course from './components/general/Course';
+import register from './components/authentication/register';
+import login from './components/authentication/login';
+import recovery from './components/authentication/recovery';
 import profile from './components/profile/Profile'
 
+const routes = [
+    {
+        path: '/',
+        name: 'dashboard',
+        component: dashboard,
+        meta: {
+            auth: undefined
+        }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: register,
+        meta: {
+            auth: false
+        }
+    },
+    {
+        path: '/login',
+        alias: '/login/:verification_code',
+        name: 'login',
+        component: login,
+        meta: {
+            auth: false
+        }
+    },
+    {
+        path: '/recovery',
+        alias: '/recovery/:verification_code',
+        name: 'recovery',
+        component: recovery,
+        meta: {
+            auth: false
+        }
+    },
+    {
+        path: '/settings',
+        name: 'settings',
+        component: settings,
+        meta: {
+            auth: true
+        }
+    },
+    {
+        path: "/profile",
+        name: 'profile',
+        component: profile,
+        meta: {
+            auth: true
+        }
+    },
+    {
+        path: "/course",
+        name: 'course',
+        component: course,
+        meta: {
+            auth: true
+        }
+    },
+    {
+        path: "/watch",
+        name: 'video',
+        component: video,
+        meta: {
+            auth: true,
+            show: 1,
+        }
+    },
+    // {
+    //     path: '/admin',
+    //     name: 'admin.dashboard',
+    //     component: AdminDashboard,
+    //     meta: {
+    //         auth: {roles: 3, redirect: {name: 'login'}, forbiddenRedirect: '/403'}
+    //     }
+    // },
+];
+
 const router = new VueRouter({
+    history: true,
     mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: dashboard,
-            component: dashboard
-        },
-        {
-            path: '/register',
-            name: register,
-            component: register
-        },
-        {
-            path: '/login',
-            name: login,
-            component: login
-        },
-        {
-            path: '/settings',
-            name: settings,
-            component: settings
-        },
-        {
-            path: "/profile",
-            name: profile,
-            component: profile,
-        },
-        {
-            path: "/progress",
-            name: progress,
-            component: progress,
-        },
-        {
-            path: "/profile-courses",
-            name: profile_courses,
-            component: profile_courses,
-        },
-        {
-            path: "/course",
-            name: course,
-            component: course,
-        },
-        {
-            path: "/watch",
-            name: video,
-            component: video,
-            meta: {
-                show: '1',
-            },
-        },
-    ]
+    routes,
 });
 
 export default router;

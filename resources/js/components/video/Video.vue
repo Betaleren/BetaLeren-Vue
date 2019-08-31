@@ -36,7 +36,6 @@
             //Default values
             let volume;
             let timer = 0;
-            let source = null;
             let mousedown = false;
             let mouseover = false;
             let volume_change = false;
@@ -70,11 +69,9 @@
             document.querySelectorAll('textarea').forEach(typingTextarea);
 
             //The script to be executed during loading
-            window.onload = function () {
-                video.setAttribute('src', 'video/Mandy.webm');
-            };
+            video.setAttribute('src', 'video/Mandy.webm');
 
-            video.oncanplaythrough = function() {
+            video.oncanplay = function() {
                 videoInformation();
 
                 //The addEventListeners
@@ -253,6 +250,7 @@
                     current_time.innerHTML = curmins + ":" + cursecs;
                 }
 
+                console.log(video.buffered);
                 sliderBar();
             }
 
@@ -265,9 +263,9 @@
             }
 
             function clickPositionBar(e) {
-                video.currentTime = Math.floor((e.offsetX / video_bar.offsetWidth) * video.duration);
-                console.log(Math.floor((e.offsetX / video_bar.offsetWidth) * video.duration));
-                //sliderBar();
+                video.currentTime = (e.offsetX / video_bar.offsetWidth) * video.duration;
+                console.log((e.offsetX / video_bar.offsetWidth) * video.duration);
+                sliderBar();
             }
 
             function hoverPositionBar(e) {

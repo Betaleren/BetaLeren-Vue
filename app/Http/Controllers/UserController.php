@@ -27,8 +27,15 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users =  User::all('id', 'firstname', 'lastname');
-        return $users;
+        {
+            $users = User::all();
+
+            return response()->json(
+                [
+                    'status' => 'success',
+                    'users' => $users->toArray()
+                ], 200);
+        }
     }
 
     /**
@@ -59,9 +66,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
-        $response = User::query()->where('id', $id)->get();
-        return response()->json($response);
+        $user = User::find($id);
+
+        return response()->json(
+            [
+                'status' => 'success',
+                'user' => $user->toArray()
+            ], 200);
     }
 
     /**

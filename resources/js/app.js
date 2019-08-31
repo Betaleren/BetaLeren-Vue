@@ -1,16 +1,34 @@
-require('./bootstrap');
+require( './bootstrap');
 
-import Vue from 'vue';
-import Routes from  '../js/routes.js';
-import VueLazyload from 'vue-lazyload';
-import main from "./components/Main.vue";
+import 'es6-promise/auto'
+import axios from 'axios'
+import Vue from 'vue'
+import VueAuth from '@websanova/vue-auth'
+import VueAxios from 'vue-axios'
+import VueRouter from 'vue-router'
+import Index from './components/Index'
+import auth from './auth'
+import router from './routes'
+import Fragment from 'vue-fragment';
 
-Vue.use(VueLazyload);
+Vue.use(Fragment.Plugin);
+
+// Set Vue globally
+window.Vue = Vue;
+
+// Set Vue router
+Vue.router = router;
+Vue.use(VueRouter);
+
+// Set Vue authentication
+Vue.use(VueAxios, axios);
+axios.defaults.baseURL = `${process.env.MIX_APP_URL}/api`;
+Vue.use(VueAuth, auth);
+
+// Load Index
+Vue.component('index', Index);
 
 const app = new Vue({
     el: '#app',
-    router: Routes,
-    render: h => h(main),
+    router
 });
-
-export default app;

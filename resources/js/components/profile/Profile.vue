@@ -46,6 +46,7 @@
                 time: '',
                 courses: [],
                 data : this.$route.query.u_id,
+                test : '',
             }
         },
 
@@ -84,7 +85,6 @@
         },
         mounted() {
             this.getUser();
-
     },
     }
 </script>
