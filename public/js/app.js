@@ -3689,6 +3689,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -43653,8 +43654,111 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("fragment", [
+    _c(
+      "div",
+      {
+        staticClass: "card bg-transparent border-0 mx-auto",
+        staticStyle: { width: "18rem" }
+      },
+      [
+        _c("img", {
+          staticClass: "card-img-top mx-auto rounded-circle",
+          staticStyle: { width: "160px", height: "160px" },
+          attrs: { src: _vm.img, alt: "Card image cap" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h5", { staticClass: "card-title font-weight-bold" }, [
+            _vm._v(_vm._s(_vm.user.first_name + " " + _vm.user.last_name) + ":")
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.permission))
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("Joined: " + _vm._s(_vm.user.created_at))
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "div",
+        {
+          staticClass: "btn-group row mb-3 w-100",
+          attrs: { role: "group", "aria-label": "Basic example" }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn rounded-0 flex-grow-0",
+              class: { activeLine: _vm.info.progress },
+              attrs: { type: "button", value: "progress" },
+              on: {
+                click: function($event) {
+                  return _vm.infoOpen($event)
+                }
+              }
+            },
+            [_vm._v("Progress")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn rounded-0 flex-grow-0",
+              class: { activeLine: _vm.info.course },
+              attrs: { type: "button", value: "course" },
+              on: {
+                click: function($event) {
+                  return _vm.infoOpen($event)
+                }
+              }
+            },
+            [_vm._v("Joined Courses")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn rounded-0 flex-grow-0",
+              class: { activeLine: _vm.info.repo },
+              attrs: { type: "button", value: "repo" },
+              on: {
+                click: function($event) {
+                  return _vm.infoOpen($event)
+                }
+              }
+            },
+            [_vm._v("Repositories")]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", [
+        _vm.info.progress ? _c("div", [_c("Progress")], 1) : _vm._e(),
+        _vm._v(" "),
+        _vm.info.course ? _c("div") : _vm._e(),
+        _vm._v(" "),
+        _vm.info.repo ? _c("div", [_c("repository")], 1) : _vm._e()
+      ])
+    ])
+  ])
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 

@@ -27,6 +27,7 @@
                     <repository></repository>
                 </div>
             </div>
+        </div>
     </fragment>
 </template>
 
