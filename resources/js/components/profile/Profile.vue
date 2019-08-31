@@ -65,10 +65,14 @@
             /**
              *  gets user data from the UserController and gets if you are the logged in user
              */
-            getUser: async function() {
+            getUser: function() {
                 // Api call to api/user/{id} to get the user data
-                let res = await axios.get('user/' + this.data);
-                this.user = res.data;
+                axios.get('user/' + this.data).then(
+                    Response => {
+                        this.user = Response.data;
+                        console.log(Response.data);
+                    }
+                );
             },
 
             infoOpen(e) {
