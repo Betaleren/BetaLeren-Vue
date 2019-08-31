@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+
+
+/***/ }),
+
 /***/ "./node_modules/@websanova/vue-auth/drivers/auth/bearer.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/@websanova/vue-auth/drivers/auth/bearer.js ***!
@@ -3644,6 +3656,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _info_Progress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info/Progress */ "./resources/js/components/profile/info/Progress.vue");
 /* harmony import */ var _info_Profile_Courses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./info/Profile-Courses */ "./resources/js/components/profile/info/Profile-Courses.vue");
+/* harmony import */ var _info_Repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./info/Repository */ "./resources/js/components/profile/info/Repository.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3692,7 +3716,8 @@ __webpack_require__.r(__webpack_exports__);
         repo: true
       },
       previous: 'progress',
-      data: this.$route.query.u_id
+      data: this.$route.query.u_id,
+      test: ''
     };
   },
   methods: {
@@ -3766,80 +3791,76 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Profile",
-  components: {
-    Progress: _info_Progress__WEBPACK_IMPORTED_MODULE_1__["default"],
-    profile_courses: _info_Profile_Courses__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
+  name: "Profile-Courses",
   data: function data() {
     return {
-      user: [],
-      permission: '',
-      loggedInUserId: null,
-      time: '',
       courses: [],
-      data: this.$route.query.u_id,
-      test: ''
+      loggedInUserId: null,
+      data: this.$route.query.u_id
     };
   },
   methods: {
     /**
-     *  gets user data from the UserController and gets if you are the logged in user
+     *  gets all the joined courses from the user of this profile from the UserController
      */
-    getUser: function getUser() {
+    getJoinedCourses: function getJoinedCourses() {
       var _this = this;
 
-      // Api call to api/user/{id} to get the user data
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/user/' + this.data).then(function (response) {
-        _this.user = response.data;
-        _this.permission = _this.getPermission(_this.user[0].permission);
-      }); // Api call to api/time/{id} to get the users his join date back
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/time/' + this.data).then(function (response) {
-        return _this.time = response.data;
-      }); // Stores the user his id in the data
-
-      this.loggedInUserId = localStorage.getItem('beta.id');
+      // Api call to api/course/{id} to get all the joined courses by the user
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/course/' + this.data).then(function (response) {
+        return _this.courses = response.data;
+      });
     },
 
     /**
-     *  this function retrieves the user his permission and will return it to plain text
+     *  this function lets you leave a joined course.
      *
-     * @param int             the permission of the user of this profile
-     * @returns {string}      plain text
+     * @param course_id   the selected course
      */
-    getPermission: function getPermission(_int) {
-      if (_int == 0) {
-        return 'Normal watcher';
-      } else if (_int == 1) {
-        return 'Course holder';
-      } else {
-        return "administrator";
-      }
+    leaveJoinedCourse: function leaveJoinedCourse(course_id) {
+      // Api call to api/course with the post data 'course_id'
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/course', {
+        course_id: course_id
+      }).then(function (Response) {
+        return console.log(Response);
+      });
     }
   },
   mounted: function mounted() {
-    this.getUser();
+    this.getJoinedCourses();
+    this.loggedInUserId = localStorage.getItem('beta.id');
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile/info/Profile-Courses.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/profile/info/Profile-Courses.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile/info/Progress.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/profile/info/Progress.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3850,7 +3871,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "Progress",
   data: function data() {
     return {
-      data: this.$route.query.u_id
+      data: ''
     };
   },
   methods: {},
@@ -3887,80 +3908,111 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Profile-Courses",
+  name: "Repository",
   data: function data() {
     return {
-      courses: [],
-      data: this.$route.query.u_id
+      data: {
+        user_id: this.$route.query.u_id,
+        code: this.$route.query.code,
+        token: 0,
+        repos: null
+      }
     };
   },
   methods: {
-    /**
-     *  gets all the joined courses from the user of this profile from the UserController
-     */
-    getJoinedCourses: function getJoinedCourses() {
+    TokenAvailable: function TokenAvailable(user_id) {
       var _this = this;
 
-      // Api call to api/course/{id} to get all the joined courses by the user
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/course/' + this.data).then(function (response) {
-        return _this.courses = response.data;
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/tokenCheck/' + user_id).then(function (response) {
+        _this.data.token = response.data;
+
+        if (response.data !== 0) {
+          _this.GetAccessToken(_this.data.user_id);
+        } else {
+          if (_this.data.code !== "") {
+            _this.AccessToken(_this.data.code, _this.data.user_id);
+          }
+        }
       });
     },
-
-    /**
-     *  this function lets you leave a joined course.
-     *
-     * @param course_id   the selected course
-     */
-    leaveJoinedCourse: function leaveJoinedCourse(course_id) {
-      // Api call to api/course with the post data 'course_id'
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/course', {
-        course_id: course_id
+    AccessToken: function AccessToken(code, user_id) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('api/git', {
+        code: code,
+        user_id: user_id
       }).then(function (Response) {
         return console.log(Response);
       });
-    }
+    },
+    GetAccessToken: function () {
+      var _GetAccessToken = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(user_id) {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/token/' + user_id);
+
+              case 2:
+                res = _context.sent;
+                this.RequestGitHubRepositories(res.data[0]['access_token']);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function GetAccessToken(_x) {
+        return _GetAccessToken.apply(this, arguments);
+      }
+
+      return GetAccessToken;
+    }(),
+    RequestGitHubRepositories: function () {
+      var _RequestGitHubRepositories = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(token) {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return fetch('https://api.github.com/user/repos', {
+                  headers: {
+                    Authorization: 'token ' + token
+                  }
+                });
+
+              case 2:
+                res = _context2.sent;
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function RequestGitHubRepositories(_x2) {
+        return _RequestGitHubRepositories.apply(this, arguments);
+      }
+
+      return RequestGitHubRepositories;
+    }()
   },
   mounted: function mounted() {
-    this.getJoinedCourses();
+    this.TokenAvailable(this.data.user_id);
+    console.log(this.data);
   }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile/info/Progress.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/profile/info/Progress.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Progress",
-  data: function data() {
-    return {
-      data: ''
-    };
-  },
-  methods: {},
-  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -45336,7 +45388,7 @@ function normalizeComponent (
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
-  * vue-router v3.1.2
+  * vue-router v3.1.3
   * (c) 2019 Evan You
   * @license MIT
   */
@@ -45477,7 +45529,7 @@ var View = {
 
     return h(component, data, children)
   }
-}
+};
 
 function resolveProps (route, config) {
   switch (typeof config) {
@@ -45606,7 +45658,7 @@ function createRoute (
   redirectedFrom,
   router
 ) {
-  var stringifyQuery$$1 = router && router.options.stringifyQuery;
+  var stringifyQuery = router && router.options.stringifyQuery;
 
   var query = location.query || {};
   try {
@@ -45620,11 +45672,11 @@ function createRoute (
     hash: location.hash || '',
     query: query,
     params: location.params || {},
-    fullPath: getFullPath(location, stringifyQuery$$1),
+    fullPath: getFullPath(location, stringifyQuery),
     matched: record ? formatMatch(record) : []
   };
   if (redirectedFrom) {
-    route.redirectedFrom = getFullPath(redirectedFrom, stringifyQuery$$1);
+    route.redirectedFrom = getFullPath(redirectedFrom, stringifyQuery);
   }
   return Object.freeze(route)
 }
@@ -46451,7 +46503,24 @@ var Link = {
         // in case the <a> is a static node
         a.isStatic = false;
         var aData = (a.data = extend({}, a.data));
-        aData.on = on;
+        aData.on = aData.on || {};
+        // transform existing events in both objects into arrays so we can push later
+        for (var event in aData.on) {
+          var handler$1 = aData.on[event];
+          if (event in on) {
+            aData.on[event] = Array.isArray(handler$1) ? handler$1 : [handler$1];
+          }
+        }
+        // append new listeners for router-link
+        for (var event$1 in on) {
+          if (event$1 in aData.on) {
+            // on[event] is always a function
+            aData.on[event$1].push(on[event$1]);
+          } else {
+            aData.on[event$1] = handler;
+          }
+        }
+
         var aAttrs = (a.data.attrs = extend({}, a.data.attrs));
         aAttrs.href = href;
       } else {
@@ -46462,7 +46531,7 @@ var Link = {
 
     return h(this.tag, data, this.$slots.default)
   }
-}
+};
 
 function guardEvent (e) {
   // don't redirect with control keys
@@ -46577,6 +46646,18 @@ function createRouteMap (
       pathList.push(pathList.splice(i, 1)[0]);
       l--;
       i--;
+    }
+  }
+
+  if (true) {
+    // warn if routes do not include leading slashes
+    var found = pathList
+    // check for missing leading slash
+      .filter(function (path) { return path && path.charAt(0) !== '*' && path.charAt(0) !== '/'; });
+
+    if (found.length > 0) {
+      var pathNames = found.map(function (path) { return ("- " + path); }).join('\n');
+      warn(false, ("Non-nested routes must include a leading slash character. Fix the following routes: \n" + pathNames));
     }
   }
 
@@ -46935,6 +47016,28 @@ function resolveRecordPath (path, record) {
 
 /*  */
 
+// use User Timing api (if present) for more accurate key precision
+var Time =
+  inBrowser && window.performance && window.performance.now
+    ? window.performance
+    : Date;
+
+function genStateKey () {
+  return Time.now().toFixed(3)
+}
+
+var _key = genStateKey();
+
+function getStateKey () {
+  return _key
+}
+
+function setStateKey (key) {
+  return (_key = key)
+}
+
+/*  */
+
 var positionStore = Object.create(null);
 
 function setupScroll () {
@@ -47084,39 +47187,22 @@ function scrollToPosition (shouldScroll, position) {
 
 /*  */
 
-var supportsPushState = inBrowser && (function () {
-  var ua = window.navigator.userAgent;
+var supportsPushState =
+  inBrowser &&
+  (function () {
+    var ua = window.navigator.userAgent;
 
-  if (
-    (ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) &&
-    ua.indexOf('Mobile Safari') !== -1 &&
-    ua.indexOf('Chrome') === -1 &&
-    ua.indexOf('Windows Phone') === -1
-  ) {
-    return false
-  }
+    if (
+      (ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) &&
+      ua.indexOf('Mobile Safari') !== -1 &&
+      ua.indexOf('Chrome') === -1 &&
+      ua.indexOf('Windows Phone') === -1
+    ) {
+      return false
+    }
 
-  return window.history && 'pushState' in window.history
-})();
-
-// use User Timing api (if present) for more accurate key precision
-var Time = inBrowser && window.performance && window.performance.now
-  ? window.performance
-  : Date;
-
-var _key = genKey();
-
-function genKey () {
-  return Time.now().toFixed(3)
-}
-
-function getStateKey () {
-  return _key
-}
-
-function setStateKey (key) {
-  _key = key;
-}
+    return window.history && 'pushState' in window.history
+  })();
 
 function pushState (url, replace) {
   saveScrollPosition();
@@ -47125,10 +47211,9 @@ function pushState (url, replace) {
   var history = window.history;
   try {
     if (replace) {
-      history.replaceState({ key: _key }, '', url);
+      history.replaceState({ key: getStateKey() }, '', url);
     } else {
-      _key = genKey();
-      history.pushState({ key: _key }, '', url);
+      history.pushState({ key: setStateKey(genStateKey()) }, '', url);
     }
   } catch (e) {
     window.location[replace ? 'replace' : 'assign'](url);
@@ -47268,9 +47353,20 @@ function once (fn) {
 }
 
 var NavigationDuplicated = /*@__PURE__*/(function (Error) {
-  function NavigationDuplicated () {
-    Error.call(this, 'Navigating to current location is not allowed');
+  function NavigationDuplicated (normalizedLocation) {
+    Error.call(this);
     this.name = this._name = 'NavigationDuplicated';
+    // passing the message to super() doesn't seem to work in the transpiled version
+    this.message = "Navigating to current location (\"" + (normalizedLocation.fullPath) + "\") is not allowed";
+    // add a stack property so services like Sentry can correctly display it
+    Object.defineProperty(this, 'stack', {
+      value: new Error().stack,
+      writable: true,
+      configurable: true
+    });
+    // we could also have used
+    // Error.captureStackTrace(this, this.constructor)
+    // but it only exists on node and chrome
   }
 
   if ( Error ) NavigationDuplicated.__proto__ = Error;
@@ -47610,11 +47706,11 @@ function poll (
 
 /*  */
 
-var HTML5History = /*@__PURE__*/(function (History$$1) {
+var HTML5History = /*@__PURE__*/(function (History) {
   function HTML5History (router, base) {
     var this$1 = this;
 
-    History$$1.call(this, router, base);
+    History.call(this, router, base);
 
     var expectScroll = router.options.scrollBehavior;
     var supportsScroll = supportsPushState && expectScroll;
@@ -47642,8 +47738,8 @@ var HTML5History = /*@__PURE__*/(function (History$$1) {
     });
   }
 
-  if ( History$$1 ) HTML5History.__proto__ = History$$1;
-  HTML5History.prototype = Object.create( History$$1 && History$$1.prototype );
+  if ( History ) HTML5History.__proto__ = History;
+  HTML5History.prototype = Object.create( History && History.prototype );
   HTML5History.prototype.constructor = HTML5History;
 
   HTML5History.prototype.go = function go (n) {
@@ -47698,9 +47794,9 @@ function getLocation (base) {
 
 /*  */
 
-var HashHistory = /*@__PURE__*/(function (History$$1) {
+var HashHistory = /*@__PURE__*/(function (History) {
   function HashHistory (router, base, fallback) {
-    History$$1.call(this, router, base);
+    History.call(this, router, base);
     // check history fallback deeplinking
     if (fallback && checkFallback(this.base)) {
       return
@@ -47708,8 +47804,8 @@ var HashHistory = /*@__PURE__*/(function (History$$1) {
     ensureSlash();
   }
 
-  if ( History$$1 ) HashHistory.__proto__ = History$$1;
-  HashHistory.prototype = Object.create( History$$1 && History$$1.prototype );
+  if ( History ) HashHistory.__proto__ = History;
+  HashHistory.prototype = Object.create( History && History.prototype );
   HashHistory.prototype.constructor = HashHistory;
 
   // this is delayed until the app mounts
@@ -47863,15 +47959,15 @@ function replaceHash (path) {
 
 /*  */
 
-var AbstractHistory = /*@__PURE__*/(function (History$$1) {
+var AbstractHistory = /*@__PURE__*/(function (History) {
   function AbstractHistory (router, base) {
-    History$$1.call(this, router, base);
+    History.call(this, router, base);
     this.stack = [];
     this.index = -1;
   }
 
-  if ( History$$1 ) AbstractHistory.__proto__ = History$$1;
-  AbstractHistory.prototype = Object.create( History$$1 && History$$1.prototype );
+  if ( History ) AbstractHistory.__proto__ = History;
+  AbstractHistory.prototype = Object.create( History && History.prototype );
   AbstractHistory.prototype.constructor = AbstractHistory;
 
   AbstractHistory.prototype.push = function push (location, onComplete, onAbort) {
@@ -48166,7 +48262,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.1.2';
+VueRouter.version = '3.1.3';
 
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);
@@ -61946,8 +62042,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/d/Web-Development/BetaLeren-Vue/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /mnt/d/Web-Development/BetaLeren-Vue/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\development\web\BetaLeren-Vue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\development\web\BetaLeren-Vue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
