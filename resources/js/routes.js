@@ -60,7 +60,7 @@ const routes = [
         name: 'profile',
         component: profile,
         meta: {
-            auth: true
+            auth: undefined
         }
     },
     {

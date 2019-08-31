@@ -29,17 +29,14 @@ Route::prefix('auth')->group(function () {
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users', 'UserController@index')->middleware('isAdmin');
-    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
+    Route::get('users/{id}', 'UserController@show');
+    Route::get('git', 'GitController@index')->middleware('isAdmin');
+    Route::post('git/{id}', 'GitController@store')->middleware('isAdminOrSelf');
+    Route::get('tokenCheck/{id}', 'GitController@check');
+    Route::get('token/{id}', 'GitController@get');
 });
 
-Route::resource('user', 'UserController');
 Route::get('course/{id}', 'UserController@course');
 Route::post('course', 'UserController@leaveCourse');
-Route::get('time/{id}', 'UserController@time');
-Route::post('login', 'LoginController@login');
-Route::get('git', 'GitController@index');
-Route::post('git', 'GitController@store');
-Route::get('tokenCheck/{id}', 'GitController@check');
-Route::get('token/{id}', 'GitController@get');
 
-Route::post('register' , 'LoginController@register');
+//->middleware('isAdminOrHolderAndSelf')

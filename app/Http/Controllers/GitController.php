@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Git;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class GitController extends Controller
 {
@@ -38,7 +38,6 @@ class GitController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only(['code', 'user_id']);
         $client_id = "716c5f9342b1131e18b2";
         $client_secret = "680b04eaf1e4bca50cb1bf1b9a8b7ee56d9de45d";
         $url = "https://github.com/login/oauth/access_token";
@@ -59,9 +58,17 @@ class GitController extends Controller
         $response = curl_exec($ch);
 
         curl_close($ch);
-        $accessToken = json_decode($response)->{'access_token'};
-        DB::table('gits')->insert(['user_id'=>$request->user_id,'access_token'=>$accessToken]);
-        return $accessToken;
+        try {
+            $check = DB::table('gits')->where('user_id', Auth::user()->id)->first();
+            if (is_null($check)) {
+                $accessToken = json_decode($response)->{'access_token'};
+                DB::table('gits')->insert(['user_id' => Auth::user()->id, 'access_token' => $accessToken]);
+                return response()->json(['status' => 'success', 'message' => ['connected' => ['Your Github Account is now connected.']]], 201);
+            }
+        } catch (\Exception $e){
+            return response()->json(['status' => 'error', 'errors'=>  [ 'code_fail' => ['connecting to your Github account failed.']]], 422);
+        }
+
     }
 
     /**
@@ -73,13 +80,13 @@ class GitController extends Controller
     public function check($id)
     {
         $response = DB::table('gits')->where('user_id',  $id)->count();
-        return $response;
+        return response()->json($response);
     }
 
     public function get($id)
     {
         $token = DB::table('gits')->where('user_id',  $id)->get();
-        return $token;
+        return response()->json($token);
     }
 
     /**

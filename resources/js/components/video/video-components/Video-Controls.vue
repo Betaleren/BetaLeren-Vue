@@ -1,6 +1,6 @@
 <template>
     <div id="video_play">
-        <video id="video_player" :poster="'img/video-background.jpg'" :controlslist="'nodownload'" preload="metadata"></video>
+        <video id="video_player" :poster="'img/video-background.jpg'" :controlslist="'nodownload'" preload="auto"></video>
         <div id="video_controls" style="transform: translateY(0)">
             <div id="video_controls_seek_bar" :title="'Time -5 sec (\u2190), +5 sec (\u2192)'">
                 <span id="seek_bar_hover_time" style="left: 0px; visibility: hidden">00:00</span>

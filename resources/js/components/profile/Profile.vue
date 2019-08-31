@@ -1,31 +1,30 @@
 <template>
     <fragment>
-            <div class="card bg-transparent border-0 mx-auto" style="width: 18rem">
-                <img class="card-img-top mx-auto rounded-circle" style="width: 160px; height: 160px;" :src="img"  alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold">{{ user.first_name + " " + user.last_name}}:</h5>
-                    <hr>
-                    <p class="card-text"></p>
-                    <p class="card-text">Joined: </p>
-                </div>
+        <div class="card bg-transparent border-0 mx-auto" style="width: 18rem">
+            <img class="card-img-top mx-auto rounded-circle" style="width: 160px; height: 160px;" :src="img"  alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold">{{ user.first_name + " " + user.last_name}}:</h5>
+                <hr>
+                <p class="card-text">{{permission}}</p>
+                <p class="card-text">Joined: {{ user.created_at }}</p>
             </div>
-            <hr>
+        </div>
+        <hr>
+        <div>
+            <div class="btn-group row mb-3 w-100" role="group" aria-label="Basic example">
+                <button type="button" class="btn rounded-0 flex-grow-0" value="progress" :class="{activeLine: info.progress}" v-on:click="infoOpen($event)">Progress</button>
+                <button type="button" class="btn rounded-0 flex-grow-0" value="course" :class="{activeLine: info.course}" v-on:click="infoOpen($event)">Joined Courses</button>
+                <button type="button" class="btn rounded-0 flex-grow-0" value="repo" :class="{activeLine: info.repo}" v-on:click="infoOpen($event)">Repositories</button>
+            </div>
             <div>
-                <div class="btn-group row mb-3 w-100" role="group" aria-label="Basic example">
-                    <button type="button" class="btn rounded-0 flex-grow-0" value="progress" :class="{activeLine: info.progress}" v-on:click="infoOpen($event)">Progress</button>
-                    <button type="button" class="btn rounded-0 flex-grow-0" value="course" :class="{activeLine: info.course}" v-on:click="infoOpen($event)">Joined Courses</button>
-                    <button type="button" class="btn rounded-0 flex-grow-0" value="repo" :class="{activeLine: info.repo}" v-on:click="infoOpen($event)">Repositories</button>
+                <div v-if="info.progress">
+                    <Progress></Progress>
                 </div>
-                <div>
-                    <div v-if="info.progress">
-                        <Progress></Progress>
-                    </div>
-                    <div v-if="info.course">
-                        <profile_courses></profile_courses>
-                    </div>
-                    <div v-if="info.repo">
-                        <repository></repository>
-                    </div>
+                <div v-if="info.course">
+<!--                    <profile_courses></profile_courses>-->
+                </div>
+                <div v-if="info.repo">
+                    <repository></repository>
                 </div>
             </div>
     </fragment>
@@ -45,17 +44,15 @@
         },
         data() {
             return {
-                user: [],
+                user: {},
                 img: null,
                 permission: '',
-                loggedInUserId: null,
-                time: '',
                 info: {
                     progress: true,
                     course: false,
                     repo: false,
                 },
-                previous: 'progress',
+                previous: 'repo',
                 data : this.$route.query.u_id,
                 test : '',
             }
@@ -65,14 +62,17 @@
             /**
              *  gets user data from the UserController and gets if you are the logged in user
              */
-            getUser: function() {
-                // Api call to api/user/{id} to get the user data
-                axios.get('user/' + this.data).then(
-                    Response => {
-                        this.user = Response.data;
-                        console.log(Response.data);
-                    }
-                );
+            getUsers() {
+                this.$http({
+                    url: "users/" + this.data,
+                    method: 'GET',
+                })
+                    .then((res) => {
+                        this.user = res.data.user;
+                        this.permission = this.getPermission(res.data.user.role)
+                    }, () => {
+                        this.has_error = true;
+                    })
             },
 
             infoOpen(e) {
@@ -99,8 +99,9 @@
               }else{ return "administrator";}
             },
         },
+
         mounted() {
-            this.getUser();
+            this.getUsers();
     },
     }
 </script>
