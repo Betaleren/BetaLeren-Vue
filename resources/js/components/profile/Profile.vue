@@ -1,50 +1,63 @@
 <template>
     <fragment>
-        <div v-for="u in user" :key="u.id">
-            <div class="center text-center mb-5">
-                <div class="caption">
-                    <h1 class="title display-3">{{ u.firstname + " " + u.lastname}}</h1>
-                </div>
-            </div>
-            <div class="card mx-auto" style="width: 18rem">
-                <img class="card-img-top" :src="'img/Profile/default-avatar.png'" alt="Card image cap">
+        <div v-for="u in user" :key="u.id" class="text-muted">
+            <div class="card bg-transparent border-0 mx-auto" style="width: 18rem">
+                <img class="card-img-top mx-auto rounded-circle" style="width: 160px; height: 160px;" :src="img"  alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">User information:</h5>
+                    <h5 class="card-title font-weight-bold">{{ u.firstname + " " + u.lastname}}:</h5>
+                    <hr>
                     <p class="card-text">{{permission}}</p>
+                    <p class="card-text">Joined: {{ time }}</p>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Joined: {{ time }}</li>
-                    <li class="list-group-item"><a class="text-primary" style="cursor: pointer; text-decoration: none;">Watch progress</a></li>
-                </ul>
             </div>
             <hr>
-            <div class="center text-center mb-5">
-                <div class="caption">
-                    <h3 class="title display-4 ">{{ u.firstname + " " + u.lastname}} joined courses:</h3>
+            <div>
+                <div class="btn-group row mb-3 w-100" role="group" aria-label="Basic example">
+                    <button type="button" class="btn rounded-0 flex-grow-0" value="progress" :class="{activeLine: info.progress}" v-on:click="infoOpen($event)">Progress</button>
+                    <button type="button" class="btn rounded-0 flex-grow-0" value="course" :class="{activeLine: info.course}" v-on:click="infoOpen($event)">Joined Courses</button>
+                    <button type="button" class="btn rounded-0 flex-grow-0" value="repo" :class="{activeLine: info.repo}" v-on:click="infoOpen($event)">Repositories</button>
+                </div>
+                <div>
+                    <div v-if="info.progress">
+                        <Progress></Progress>
+                    </div>
+                    <div v-if="info.course">
+                        <profile_courses></profile_courses>
+                    </div>
+                    <div v-if="info.repo">
+                        <repository></repository>
+                    </div>
                 </div>
             </div>
         </div>
-        <profile_courses></profile_courses>
     </fragment>
 </template>
 
 <script>
     import axios from 'axios';
     import Progress from './info/Progress';
-    import profile_courses from './info/Profile-Courses';
+    import Profile_courses from './info/Profile-Courses';
+    import Repository from "./info/Repository";
     export default {
         name: "Profile",
         components: {
             Progress,
-            profile_courses
+            Profile_courses,
+            Repository
         },
         data() {
             return {
                 user: [],
+                img: null,
                 permission: '',
                 loggedInUserId: null,
                 time: '',
-                courses: [],
+                info: {
+                    progress: false,
+                    course: false,
+                    repo: true,
+                },
+                previous: 'progress',
                 data : this.$route.query.u_id,
                 test : '',
             }
@@ -59,7 +72,9 @@
                 // Api call to api/user/{id} to get the user data
                 axios.get('api/user/' + this.data)
                     .then(response => {this.user = response.data;
-                        this.permission = this.getPermission(this.user[0].permission);});
+                        this.permission = this.getPermission(this.user[0].permission);
+                        this.img = 'img/Profile/' + this.user[0].profile_picture;
+                    });
 
                 // Api call to api/time/{id} to get the users his join date back
                 axios.get('api/time/' + this.data)
@@ -69,6 +84,16 @@
                 this.loggedInUserId = localStorage.getItem('beta.id');
             },
 
+            infoOpen(e) {
+                let value = e.target.value;
+                let previousValue = this.previous;
+                if (previousValue !== value){
+                    this.info[previousValue] = false;
+                    this.info[value] = true;
+                    this.previous = value;
+                }
+            },
+
             /**
              *  this function retrieves the user his permission and will return it to plain text
              *
@@ -76,9 +101,9 @@
              * @returns {string}      plain text
              */
             getPermission: function(int){
-              if(int == 0) {
+              if(int === 0) {
                   return 'Normal watcher';
-              } else if(int == 1) {
+              } else if(int === 1) {
                   return 'Course holder';
               }else{ return "administrator";}
             },

@@ -28,6 +28,7 @@
         data() {
             return {
                 courses: [],
+                loggedInUserId: null,
                 data : this.$route.query.u_id,
             }
         },
@@ -59,6 +60,7 @@
 
         mounted() {
             this.getJoinedCourses();
+            this.loggedInUserId = localStorage.getItem('beta.id');
         },
     }
 </script>
