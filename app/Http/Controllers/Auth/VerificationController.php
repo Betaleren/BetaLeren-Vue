@@ -2,40 +2,29 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\VerifiesEmails;
+
 
 class VerificationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
-    |
-    */
-
-    use VerifiesEmails;
-
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    //verify User
+    public function verify($request)
     {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $check = DB::table('user_verifications')->where('token',$request)->first();
+        if(!is_null($check)){
+            $user = User::find($check->user_id);
+            if($user->verified == 1){
+                return response()->json(['status'=> 'success', 'message'=> [ 'verified' => ['Account already verified.']]], 201);
+            }
+
+            DB::table('users')->where('id', $user->id)->update(['verified' => 1, 'email_verified_at' => Carbon::now()]);
+            DB::table('user_verifications')->where('token',$request)->delete();
+
+            return response()->json(['status'=> 'success', 'message'=> [ 'verified' => ['You have successfully verified your email address.']]], 201);
+        }
+        return response()->json(['status'=> 'error', 'errors'=> [ 'fail_verify' => ['Verification code is invalid.']]], 422);
     }
 }

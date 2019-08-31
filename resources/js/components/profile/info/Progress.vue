@@ -10,7 +10,7 @@
 
         data() {
             return {
-                data : this.$route.query.u_id,
+                data : '',
             }
         },
 
@@ -19,6 +19,7 @@
         },
 
         mounted() {
+
         }
     }
 </script>

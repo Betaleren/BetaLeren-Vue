@@ -18,11 +18,11 @@
                 </ul>
             </div>
         </div>
-        <div v-if="isLoggedIn">
+        <div v-if="$auth.check()">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <div class="nav-link dropdown-toggle active p-0" id="navbarDropdownMenuLink1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{user}}
+                        {{ $auth.user().first_name }} {{ $auth.user().last_name }}
                         <img :src="'/img/Profile/default-avatar.png'" class="ml-2 rounded-circle" alt="Picture" width="40px" height="40px">
                     </div>
                     <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdownMenuLink1">
@@ -31,7 +31,7 @@
                 </li>
             </ul>
         </div>
-        <div v-if="!isLoggedIn">
+        <div v-if="!$auth.check()">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <div class="nav-link dropdown-toggle active p-0" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,22 +51,10 @@
     import SubNav from './Sub-Nav';
 
     export default {
+        name: "Nav-Bar",
         components: {
             SubNav,
         },
-        data(){
-            return{
-                isLoggedIn: localStorage.getItem('beta.jwt') != null,
-                user: localStorage.getItem('beta.firstname')
-            }
-        },
-        mounted() {
-            this.$root.$on('myEvent', (text) => {
-                this.isLoggedIn = text;
-                this.user = localStorage.getItem('beta.firstname')
-            })
-        },
-        name: "Nav-Bar"
     }
 </script>
 
