@@ -1,7 +1,9 @@
 <template>
     <div class="container">
-        <div class="card card-default">
-            <div class="card-header">Password reset</div>
+        <div class="card w-sm-400 login-card">
+            <div class="card-header">
+                <h3 class="m-0 text-center text-muted">Password reset</h3>
+            </div>
             <div v-if="!recovery_code" class="card-body">
                 <div class="alert alert-danger" v-if="has_error && errors.email">
                     <p class="m-0">{{ errors.email[0] }}</p>
@@ -9,12 +11,12 @@
                 <div class="alert alert-success" v-if="has_success && success.send">
                     <p class="m-0">{{ success.send[0] }}</p>
                 </div>
-                <form autocomplete="off" @submit.prevent="send" method="post">
+                <form @submit.prevent="send" method="post">
                     <div class="form-group">
                         <label for="email">E-mail</label>
                         <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email" required>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Send</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </form>
             </div>
 
@@ -25,7 +27,7 @@
                 <div class="alert alert-success" v-if="has_success && success.changed">
                     <p class="m-0">{{ success.changed[0] }}</p>
                 </div>
-                <form autocomplete="off" @submit.prevent="change" method="post">
+                <form @submit.prevent="change" method="post">
                     <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
                         <label for="password">New password</label>
                         <input type="password" id="password" class="form-control" v-model="password">
@@ -35,7 +37,7 @@
                         <label for="password_confirmation">Password confirmation</label>
                         <input type="password" id="password_confirmation" class="form-control" v-model="password_confirmation">
                     </div>
-                    <button type="submit" class="btn btn-secondary">Change</button>
+                    <button type="submit" class="btn btn-primary">Change</button>
                 </form>
             </div>
         </div>
