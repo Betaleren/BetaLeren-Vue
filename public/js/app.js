@@ -3652,13 +3652,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _info_Progress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info/Progress */ "./resources/js/components/profile/info/Progress.vue");
-/* harmony import */ var _info_Profile_Courses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./info/Profile-Courses */ "./resources/js/components/profile/info/Profile-Courses.vue");
-/* harmony import */ var _info_Repository__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./info/Repository */ "./resources/js/components/profile/info/Repository.vue");
-//
-//
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _info_Progress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./info/Progress */ "./resources/js/components/profile/info/Progress.vue");
+/* harmony import */ var _info_Profile_Courses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./info/Profile-Courses */ "./resources/js/components/profile/info/Profile-Courses.vue");
+/* harmony import */ var _info_Repository__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./info/Repository */ "./resources/js/components/profile/info/Repository.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3699,9 +3705,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Profile",
   components: {
-    Progress: _info_Progress__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Profile_courses: _info_Profile_Courses__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Repository: _info_Repository__WEBPACK_IMPORTED_MODULE_3__["default"]
+    Progress: _info_Progress__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Profile_courses: _info_Profile_Courses__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Repository: _info_Repository__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
@@ -3711,9 +3717,9 @@ __webpack_require__.r(__webpack_exports__);
       loggedInUserId: null,
       time: '',
       info: {
-        progress: false,
+        progress: true,
         course: false,
-        repo: true
+        repo: false
       },
       previous: 'progress',
       data: this.$route.query.u_id,
@@ -3724,22 +3730,36 @@ __webpack_require__.r(__webpack_exports__);
     /**
      *  gets user data from the UserController and gets if you are the logged in user
      */
-    getUser: function getUser() {
-      var _this = this;
+    getUser: function () {
+      var _getUser = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('user/' + this.data);
 
-      // Api call to api/user/{id} to get the user data
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/user/' + this.data).then(function (response) {
-        _this.user = response.data;
-        _this.permission = _this.getPermission(_this.user[0].permission);
-        _this.img = 'img/Profile/' + _this.user[0].profile_picture;
-      }); // Api call to api/time/{id} to get the users his join date back
+              case 2:
+                res = _context.sent;
+                this.user = res.data;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/time/' + this.data).then(function (response) {
-        return _this.time = response.data;
-      }); // Stores the user his id in the data
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
 
-      this.loggedInUserId = localStorage.getItem('beta.id');
-    },
+      function getUser() {
+        return _getUser.apply(this, arguments);
+      }
+
+      return getUser;
+    }(),
     infoOpen: function infoOpen(e) {
       var value = e.target.value;
       var previousValue = this.previous;
@@ -3938,7 +3958,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     AccessToken: function AccessToken(code, user_id) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('api/git', {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('git', {
         code: code,
         user_id: user_id
       }).then(function (Response) {
@@ -3955,7 +3975,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/token/' + user_id);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('token/' + user_id);
 
               case 2:
                 res = _context.sent;
@@ -43631,110 +43651,100 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "fragment",
-    _vm._l(_vm.user, function(u) {
-      return _c("div", { key: u.id, staticClass: "text-muted" }, [
-        _c(
-          "div",
-          {
-            staticClass: "card bg-transparent border-0 mx-auto",
-            staticStyle: { width: "18rem" }
-          },
-          [
-            _c("img", {
-              staticClass: "card-img-top mx-auto rounded-circle",
-              staticStyle: { width: "160px", height: "160px" },
-              attrs: { src: _vm.img, alt: "Card image cap" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h5", { staticClass: "card-title font-weight-bold" }, [
-                _vm._v(_vm._s(u.firstname + " " + u.lastname) + ":")
-              ]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v(_vm._s(_vm.permission))
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v("Joined: " + _vm._s(_vm.time))
-              ])
-            ])
-          ]
-        ),
+  return _c("fragment", [
+    _c(
+      "div",
+      {
+        staticClass: "card bg-transparent border-0 mx-auto",
+        staticStyle: { width: "18rem" }
+      },
+      [
+        _c("img", {
+          staticClass: "card-img-top mx-auto rounded-circle",
+          staticStyle: { width: "160px", height: "160px" },
+          attrs: { src: _vm.img, alt: "Card image cap" }
+        }),
         _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", [
+        _c("div", { staticClass: "card-body" }, [
+          _c("h5", { staticClass: "card-title font-weight-bold" }, [
+            _vm._v(_vm._s(_vm.user.first_name + " " + _vm.user.last_name) + ":")
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [_vm._v("Joined: ")])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "div",
+        {
+          staticClass: "btn-group row mb-3 w-100",
+          attrs: { role: "group", "aria-label": "Basic example" }
+        },
+        [
           _c(
-            "div",
+            "button",
             {
-              staticClass: "btn-group row mb-3 w-100",
-              attrs: { role: "group", "aria-label": "Basic example" }
+              staticClass: "btn rounded-0 flex-grow-0",
+              class: { activeLine: _vm.info.progress },
+              attrs: { type: "button", value: "progress" },
+              on: {
+                click: function($event) {
+                  return _vm.infoOpen($event)
+                }
+              }
             },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "btn rounded-0 flex-grow-0",
-                  class: { activeLine: _vm.info.progress },
-                  attrs: { type: "button", value: "progress" },
-                  on: {
-                    click: function($event) {
-                      return _vm.infoOpen($event)
-                    }
-                  }
-                },
-                [_vm._v("Progress")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn rounded-0 flex-grow-0",
-                  class: { activeLine: _vm.info.course },
-                  attrs: { type: "button", value: "course" },
-                  on: {
-                    click: function($event) {
-                      return _vm.infoOpen($event)
-                    }
-                  }
-                },
-                [_vm._v("Joined Courses")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn rounded-0 flex-grow-0",
-                  class: { activeLine: _vm.info.repo },
-                  attrs: { type: "button", value: "repo" },
-                  on: {
-                    click: function($event) {
-                      return _vm.infoOpen($event)
-                    }
-                  }
-                },
-                [_vm._v("Repositories")]
-              )
-            ]
+            [_vm._v("Progress")]
           ),
           _vm._v(" "),
-          _c("div", [
-            _vm.info.progress ? _c("div", [_c("Progress")], 1) : _vm._e(),
-            _vm._v(" "),
-            _vm.info.course ? _c("div", [_c("profile_courses")], 1) : _vm._e(),
-            _vm._v(" "),
-            _vm.info.repo ? _c("div", [_c("repository")], 1) : _vm._e()
-          ])
-        ])
+          _c(
+            "button",
+            {
+              staticClass: "btn rounded-0 flex-grow-0",
+              class: { activeLine: _vm.info.course },
+              attrs: { type: "button", value: "course" },
+              on: {
+                click: function($event) {
+                  return _vm.infoOpen($event)
+                }
+              }
+            },
+            [_vm._v("Joined Courses")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn rounded-0 flex-grow-0",
+              class: { activeLine: _vm.info.repo },
+              attrs: { type: "button", value: "repo" },
+              on: {
+                click: function($event) {
+                  return _vm.infoOpen($event)
+                }
+              }
+            },
+            [_vm._v("Repositories")]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", [
+        _vm.info.progress ? _c("div", [_c("Progress")], 1) : _vm._e(),
+        _vm._v(" "),
+        _vm.info.course ? _c("div", [_c("profile_courses")], 1) : _vm._e(),
+        _vm._v(" "),
+        _vm.info.repo ? _c("div", [_c("repository")], 1) : _vm._e()
       ])
-    }),
-    0
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

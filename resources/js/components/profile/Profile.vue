@@ -1,13 +1,12 @@
 <template>
     <fragment>
-        <div v-for="u in user" :key="u.id" class="text-muted">
             <div class="card bg-transparent border-0 mx-auto" style="width: 18rem">
                 <img class="card-img-top mx-auto rounded-circle" style="width: 160px; height: 160px;" :src="img"  alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">{{ u.firstname + " " + u.lastname}}:</h5>
+                    <h5 class="card-title font-weight-bold">{{ user.first_name + " " + user.last_name}}:</h5>
                     <hr>
-                    <p class="card-text">{{permission}}</p>
-                    <p class="card-text">Joined: {{ time }}</p>
+                    <p class="card-text"></p>
+                    <p class="card-text">Joined: </p>
                 </div>
             </div>
             <hr>
@@ -29,7 +28,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </fragment>
 </template>
 
@@ -53,9 +51,9 @@
                 loggedInUserId: null,
                 time: '',
                 info: {
-                    progress: false,
+                    progress: true,
                     course: false,
-                    repo: true,
+                    repo: false,
                 },
                 previous: 'progress',
                 data : this.$route.query.u_id,
@@ -67,21 +65,10 @@
             /**
              *  gets user data from the UserController and gets if you are the logged in user
              */
-            getUser: function() {
-
+            getUser: async function() {
                 // Api call to api/user/{id} to get the user data
-                axios.get('api/user/' + this.data)
-                    .then(response => {this.user = response.data;
-                        this.permission = this.getPermission(this.user[0].permission);
-                        this.img = 'img/Profile/' + this.user[0].profile_picture;
-                    });
-
-                // Api call to api/time/{id} to get the users his join date back
-                axios.get('api/time/' + this.data)
-                    .then(response => (this.time = response.data));
-
-                // Stores the user his id in the data
-                this.loggedInUserId = localStorage.getItem('beta.id');
+                let res = await axios.get('user/' + this.data);
+                this.user = res.data;
             },
 
             infoOpen(e) {

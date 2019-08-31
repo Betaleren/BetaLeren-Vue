@@ -10,7 +10,7 @@ import course from './components/general/Course';
 import register from './components/authentication/register';
 import login from './components/authentication/login';
 import recovery from './components/authentication/recovery';
-import profile from './components/profile/Profile'
+import profile from './components/profile/Profile';
 
 const routes = [
     {

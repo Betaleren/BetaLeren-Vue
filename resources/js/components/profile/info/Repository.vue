@@ -39,11 +39,11 @@
             },
 
             AccessToken: function (code, user_id) {
-                Axios.post('api/git', {code, user_id})
+                Axios.post('git', {code, user_id})
                     .then(Response => console.log(Response));
             },
             GetAccessToken: async function (user_id) {
-                let res = await Axios.get('api/token/' + user_id);
+                let res = await Axios.get('token/' + user_id);
                 this.RequestGitHubRepositories(res.data[0]['access_token']);
             },
             RequestGitHubRepositories: async function (token) {
