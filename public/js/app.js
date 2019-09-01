@@ -3706,12 +3706,13 @@ __webpack_require__.r(__webpack_exports__);
       user: {},
       img: null,
       permission: '',
+      connecting: true,
       info: {
         progress: true,
         course: false,
         repo: false
       },
-      previous: 'repo',
+      previous: 'progress',
       data: this.$route.query.u_id,
       test: ''
     };
@@ -3762,6 +3763,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getUsers();
+
+    if (this.$route.query.code !== null) {
+      this.info.progress = false;
+      this.info.repo = true;
+      this.previous = 'repo';
+    }
   }
 });
 
@@ -3949,8 +3956,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     AccessToken: function AccessToken(code) {
-      var _this2 = this;
-
       var app = this;
 
       if (this.data.code != null) {
@@ -3964,8 +3969,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           app.has_error = false;
           app.has_success = true;
           app.success = res.data.message || {};
-
-          _this2.TokenAvailable(_this2.data.user_id);
+          app.TokenAvailable(app.data.user_id);
         }, function (res) {
           app.has_error = true;
           app.has_success = false;
@@ -43960,13 +43964,13 @@ var render = function() {
               attrs: {
                 href:
                   "https://github.com/login/oauth/authorize?client_id=716c5f9342b1131e18b2&redirect_uri=http://127.0.0.1:8000/profile?u_id=" +
-                  _vm.data.user_id
+                  _vm.$auth.user().id
               }
             },
             [
               _c(
                 "button",
-                { staticClass: "btn btn-primary ", attrs: { type: "button" } },
+                { staticClass: "btn btn-primary", attrs: { type: "button" } },
                 [
                   _c(
                     "svg",

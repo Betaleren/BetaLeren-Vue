@@ -48,12 +48,13 @@
                 user: {},
                 img: null,
                 permission: '',
+                connecting: true,
                 info: {
                     progress: true,
                     course: false,
                     repo: false,
                 },
-                previous: 'repo',
+                previous: 'progress',
                 data : this.$route.query.u_id,
                 test : '',
             }
@@ -103,6 +104,12 @@
 
         mounted() {
             this.getUsers();
+
+            if (this.$route.query.code !== null){
+                this.info.progress = false;
+                this.info.repo = true;
+                this.previous = 'repo';
+            }
     },
     }
 </script>

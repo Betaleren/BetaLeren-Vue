@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends Migration
+class CreateCoursesVideosCommentsRepliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
+        Schema::create('courses_videos_comments_replies', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('course_video_comment_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->string('token');
-            $table->timestamp('created_at')->useCurrent();
+            $table->text('comment_reply');
+            $table->timestamps();
+            $table->index('course_video_comment_id');
             $table->index('user_id');
+            $table->foreign('course_video_comment_id')->references('id')->on('courses_videos_comments')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -30,6 +33,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('courses_videos_comments_subcomments');
     }
 }
