@@ -18,16 +18,16 @@ class ForgotPasswordController extends Controller
             return response()->json(['status' => 'error', 'errors' => ['email'=> ['Your email address was not found.']]], 422);
         }
 
-        $already_code = DB::table('password_resets')->where('user_id', $user->id)->first();
+        $already_code = DB::table('users_password_resets')->where('user_id', $user->id)->first();
         if ($already_code) {
-            DB::table('password_resets')->where('user_id', $user->id)->delete();
+            DB::table('users_password_resets')->where('user_id', $user->id)->delete();
         }
 
         $email = $user->email;
         $name = $user->first_name .' ' .$user->last_name;
         $subject = "Password reset.";
         $recovery_code = str_random(30);  //Generate recovery code
-        DB::table('password_resets')->insert(['user_id'=>$user->id,'token'=>$recovery_code]);
+        DB::table('users_password_resets')->insert(['user_id'=>$user->id,'token'=>$recovery_code]);
 
         EmailController::recovery($email, $name, $subject, $recovery_code);
 

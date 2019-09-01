@@ -94,3 +94,5 @@ fabric.properties
 package\.json
 
 package-lock\.json
+
+*.rar

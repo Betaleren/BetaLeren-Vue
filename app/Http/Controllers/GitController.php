@@ -59,10 +59,10 @@ class GitController extends Controller
 
         curl_close($ch);
         try {
-            $check = DB::table('gits')->where('user_id', Auth::user()->id)->first();
+            $check = DB::table('users_gits')->where('user_id', Auth::user()->id)->first();
             if (is_null($check)) {
                 $accessToken = json_decode($response)->{'access_token'};
-                DB::table('gits')->insert(['user_id' => Auth::user()->id, 'access_token' => $accessToken]);
+                DB::table('users_gits')->insert(['user_id' => Auth::user()->id, 'access_token' => $accessToken]);
                 return response()->json(['status' => 'success', 'message' => ['connected' => ['Your Github Account is now connected.']]], 201);
             }
         } catch (\Exception $e){
@@ -79,13 +79,13 @@ class GitController extends Controller
      */
     public function check($id)
     {
-        $response = DB::table('gits')->where('user_id',  $id)->count();
+        $response = DB::table('users_gits')->where('user_id',  $id)->count();
         return response()->json($response);
     }
 
     public function get($id)
     {
-        $token = DB::table('gits')->where('user_id',  $id)->get();
+        $token = DB::table('users_gits')->where('user_id',  $id)->get();
         return response()->json($token);
     }
 

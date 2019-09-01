@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserVerificationsTable extends Migration
+class CreateCoursesVideosCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateUserVerificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_verifications', function (Blueprint $table) {
+        Schema::create('courses_videos_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('course_video_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->string('token');
-            $table->timestamp('created_at')->useCurrent();
+            $table->text('comment');
+            $table->timestamps();
+            $table->index('course_video_id');
             $table->index('user_id');
+            $table->foreign('course_video_id')->references('id')->on('courses_videos')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -30,10 +33,6 @@ class CreateUserVerificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("user_verifications");
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_verified');
-        });
+        Schema::dropIfExists('courses_videos_comments');
     }
 }
