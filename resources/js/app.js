@@ -10,8 +10,15 @@ import Index from './components/Index'
 import auth from './auth'
 import router from './routes'
 import Fragment from 'vue-fragment';
+import VueLazyload from 'vue-lazyload'
 
 Vue.use(Fragment.Plugin);
+Vue.use(VueLazyload, {
+    preLoad: 1.3,
+    error: 'img/website/error.png',
+    loading: 'img/website/loading.gif',
+    attempt: 2
+});
 
 // Set Vue globally
 window.Vue = Vue;

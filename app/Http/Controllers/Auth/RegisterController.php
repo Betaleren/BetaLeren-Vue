@@ -39,7 +39,7 @@ class RegisterController extends Controller
         $user->save();
 
         $email = $request->email;
-        $name = $request->first_name .' ' .$request->last_name;
+        $name = $first_name .' ' .$last_name;
         $subject = "Please verify your email address.";
         $verification_code = str_random(30);
         DB::table('users_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);

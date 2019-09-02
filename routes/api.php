@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+// Api routes for login
+// Api link api/auth/
 Route::prefix('auth')->group(function () {
     Route::post('register', 'Auth\RegisterController@register');
     Route::post('login', 'Auth\LoginController@Login');
@@ -27,6 +29,18 @@ Route::prefix('auth')->group(function () {
     });
 });
 
+// Api routes for course
+// Api link api/course/
+Route::prefix('course')->group(function () {
+    Route::get('courses', 'Course\CourseController@index');
+
+    Route::group(['middleware' => 'auth:api'], function(){
+
+    });
+});
+
+// If the user need to be login
+// Api link api/
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users', 'UserController@index')->middleware('isAdmin');
     Route::get('users/{id}', 'UserController@show');
@@ -36,7 +50,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('token/{id}', 'GitController@get');
 });
 
-Route::get('course/{id}', 'UserController@course');
-Route::post('course', 'UserController@leaveCourse');
+
+Route::get('course', 'Controller@leaveCourse');
 
 //->middleware('isAdminOrHolderAndSelf')

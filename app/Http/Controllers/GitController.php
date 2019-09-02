@@ -16,7 +16,6 @@ class GitController extends Controller
      */
     public function index()
     {
-        //
         return Git::all();
     }
 

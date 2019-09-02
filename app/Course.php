@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Git extends Model
+class Course extends Model
 {
-    //
     protected $fillable = [
-        'user_id', 'access_token'
+        'user_id', 'title', 'description', 'time_length', 'thumbnail'
     ];
 }

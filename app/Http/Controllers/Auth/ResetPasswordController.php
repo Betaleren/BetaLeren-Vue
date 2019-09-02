@@ -27,7 +27,8 @@ class ResetPasswordController extends Controller
             }
 
             $user = User::where('id', $check->user_id)->first();
-            $user->update(['password' => bcrypt($request->password)]);
+            $user->password = bcrypt($request->password);
+            $user->save();
             DB::table('users_password_resets')->where('user_id', $user->id)->delete();
 
             return response()->json(['status' => 'success', 'message' => ['changed' => ['Your password is being changed']]], 201);

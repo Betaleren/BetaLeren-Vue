@@ -68,7 +68,7 @@ const routes = [
         name: 'course',
         component: course,
         meta: {
-            auth: true
+            auth: undefined
         }
     },
     {

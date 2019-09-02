@@ -20,7 +20,9 @@ class VerificationController extends Controller
                 return response()->json(['status'=> 'success', 'message'=> [ 'verified' => ['Account already verified.']]], 201);
             }
 
-            DB::table('users')->where('id', $user->id)->update(['verified' => 1, 'email_verified_at' => Carbon::now()]);
+            $user->verified = 1;
+            $user->email_verified_at = Carbon::now();
+            $user->save();
             DB::table('users_verifications')->where('token',$request)->delete();
 
             return response()->json(['status'=> 'success', 'message'=> [ 'verified' => ['You have successfully verified your email address.']]], 201);
