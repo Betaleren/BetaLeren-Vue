@@ -80,10 +80,17 @@
     .w-lg-75 {
         width: 75%;
     }
+
+    .w-lg-90 {
+        width: 90% !important;
+        max-width: 1728px;
+    }
 }
 
 @include media-breakpoint-up(xl) {
-
+    .w-xl-400 {
+        width: 400px;
+    }
 }
 
 // css for smaller than the sizes
@@ -105,6 +112,10 @@
     .mx--lg-3 {
         margin: 0 $spacer;
     }
+
+    .w--lg-100 {
+        width: 100%;
+    }
 }
 
 .btn:active,
@@ -114,8 +125,16 @@
     box-shadow: none !important;
 }
 
+.bg-light {
+    background-color: #eeeeee !important;
+}
+
 .mt-7 {
     margin-top: ($spacer * 6);
+}
+
+.px-15 {
+    padding: 0 15px;
 }
 
 .line {
@@ -158,4 +177,48 @@
 
 .clickable{
     cursor: pointer;
+}
+
+#count {
+    counter-increment: i;
+}
+
+.counter::after {
+    content: counter(i);
+}
+
+#summary {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#summary p.collapse:not(.show) {
+    max-height: 64px !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+#summary p.collapsing {
+    min-height: 63px !important;
+}
+
+#summary a:not(.hidden).collapsed:after  {
+    content: '+ Read More';
+}
+
+#summary a:not(.hidden):not(.collapsed):after {
+    content: '- Read Less';
+}
+
+.no_resize {
+    resize: none !important;
+}
+
+.text-muted-darker {
+    color: #3b4044 !important;
+}
+
+.text-muted-lighter {
+    color: #a0a6ac !important;
 }

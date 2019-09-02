@@ -4,65 +4,78 @@
             <h3 class="m-0 text-center text-muted">Register</h3>
         </div>
         <div class="card-body">
-            <form @submit.prevent="register" method="post">
+            <div class="alert alert-danger" v-if="has_error && !success">
+                <p class="m-0" v-if="error === 'registration_validation_error'">Validation error (s), please consult the message (s) below.</p>
+                <p class="m-0" v-else>Error, can not register at the moment. If the problem persists, please contact an administrator.</p>
+            </div>
+            <form @submit.prevent="register" v-if="!success" method="post">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" v-model="email">
+                    <label for="first_name">First name</label>
+                    <input type="text" id="first_name" class="form-control" v-model="first_name">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Firstname</label>
-                    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Enter firstname" v-model="firstname">
+                    <label for="last_name">Last name</label>
+                    <input type="text" id="last_name" class="form-control" v-model="last_name">
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Lastname</label>
-                    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Enter lastname" v-model="lastname">
+                <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.email }">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" class="form-control" placeholder="user@example.com" v-model="email">
+                    <span class="help-block text-danger" v-if="has_error && errors.email">{{ errors.email[0] }}</span>
                 </div>
-                <div class="form-group">
-                    <label >Password</label>
-                    <input type="password" class="form-control"  placeholder="Enter password" v-model="password">
+                <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" v-model="password">
+                    <span class="help-block text-danger" v-if="has_error && errors.password">{{ errors.password[0] }}</span>
                 </div>
-                <div class="form-group">
-                    <label >Confirm password</label>
-                    <input type="password" class="form-control"  placeholder="Enter confirm password" v-model="cpassword">
+                <div class="form-group" v-bind:class="{ 'has-error': has_error && errors.password }">
+                    <label for="password_confirmation">Password confirmation</label>
+                    <input type="password" id="password_confirmation" class="form-control" v-model="password_confirmation">
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
     export default {
         name: "register",
-        data(){
-            return{
-                email: "",
-                firstname: "",
-                lastname: "",
-                password: "",
-                cpassword: "",
+        data() {
+            return {
+                first_name: '',
+                last_name: '',
+                email: '',
+                password: '',
+                password_confirmation: '',
+                has_error: false,
+                error: '',
+                errors: {},
+                success: false
             }
-        },
-        methods: {
-            register(e){
-                e.preventDefault()
-                if(this.password !== this.cpassword || this.password.length <= 0){
-                    this.password = ""
-                    this.cpassword = ""
-                    return alert('password do not match')
-                }
-                let firstname = this.firstname,
-                    lastname = this.lastnamel,
-                    email = this.email,
-                    password = this.password,
-                    c_password = this.cpassword;
-                axios.post('api/register', {firstname, lastname,  email, password, c_password}).then(response =>{
-                    this.$router.push('/login')
+        },    methods: {
+            register() {
+                let app = this;
+                this.$auth.register({
+                    data: {
+                        first_name: app.first_name,
+                        last_name: app.last_name,
+                        email: app.email,
+                        password: app.password,
+                        password_confirmation: app.password_confirmation
+                    },
+                    success: function () {
+                        app.success = true;
+                        this.$router.push({name: 'login', params: {successRegistrationRedirect: true}});
+                    },
+                    error: function (res) {
+                        app.has_error = true;
+                        app.error = res.response.data.error;
+                        app.errors = res.response.data.errors || {}
+                    }
                 })
             }
         },
-        }
+    }
 </script>
 
 <style scoped>

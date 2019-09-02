@@ -9,7 +9,7 @@
                         <h4 class="card-title"><a class="text-primary" style="cursor: pointer; text-decoration: none;" href="">{{ course.title}}</a></h4>
                         <p class="card-text">{{ course.description }}</p>
                         <hr style="max-width: 80%">
-                        <div v-if="loggedInUserId === data">
+                        <div v-if="this.$auth.user().id === data">
                             <button type="button" v-on:click="leaveJoinedCourse(course.id); getJoinedCourses()" class="btn btn-danger"><i class='fas fa-sign-out-alt px-4'></i></button>
                         </div>
                     </div>
@@ -21,14 +21,12 @@
 </template>
 
 <script>
-    import axios from 'axios';
     export default {
         name: "Profile-Courses",
 
         data() {
             return {
                 courses: [],
-                loggedInUserId: null,
                 data : this.$route.query.u_id,
             }
         },
@@ -41,7 +39,7 @@
             getJoinedCourses: function() {
 
                 // Api call to api/course/{id} to get all the joined courses by the user
-                axios.get('api/course/' + this.data)
+                axios.get('course/' + this.data)
                     .then(response => (this.courses = response.data));
             },
 
@@ -53,14 +51,13 @@
             leaveJoinedCourse : function(course_id) {
 
                 // Api call to api/course with the post data 'course_id'
-                axios.post('api/course', { course_id}).then(Response => console.log(Response));
+                axios.post('course', { course_id}).then(Response => console.log(Response));
             },
 
         },
 
         mounted() {
             this.getJoinedCourses();
-            this.loggedInUserId = localStorage.getItem('beta.id');
         },
     }
 </script>

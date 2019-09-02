@@ -1,32 +1,30 @@
 <template>
     <fragment>
-        <div v-for="u in user" :key="u.id" class="text-muted">
-            <div class="card bg-transparent border-0 mx-auto" style="width: 18rem">
-                <img class="card-img-top mx-auto rounded-circle" style="width: 160px; height: 160px;" :src="img"  alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold">{{ u.firstname + " " + u.lastname}}:</h5>
-                    <hr>
-                    <p class="card-text">{{permission}}</p>
-                    <p class="card-text">Joined: {{ time }}</p>
-                </div>
+        <div class="card bg-transparent border-0 mx-auto" style="width: 18rem">
+            <img class="card-img-top mx-auto rounded-circle" style="width: 160px; height: 160px;" :src="img"  alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title font-weight-bold">{{ user.first_name + " " + user.last_name}}:</h5>
+                <hr>
+                <p class="card-text">{{permission}}</p>
+                <p class="card-text">Joined: {{ user.created_at }}</p>
             </div>
-            <hr>
+        </div>
+        <hr>
+        <div>
+            <div class="btn-group row mb-3 w-100" role="group" aria-label="Basic example">
+                <button type="button" class="btn rounded-0 flex-grow-0" value="progress" :class="{activeLine: info.progress}" v-on:click="infoOpen($event)">Progress</button>
+                <button type="button" class="btn rounded-0 flex-grow-0" value="course" :class="{activeLine: info.course}" v-on:click="infoOpen($event)">Joined Courses</button>
+                <button type="button" class="btn rounded-0 flex-grow-0" value="repo" :class="{activeLine: info.repo}" v-on:click="infoOpen($event)">Repositories</button>
+            </div>
             <div>
-                <div class="btn-group row mb-3 w-100" role="group" aria-label="Basic example">
-                    <button type="button" class="btn rounded-0 flex-grow-0" value="progress" :class="{activeLine: info.progress}" v-on:click="infoOpen($event)">Progress</button>
-                    <button type="button" class="btn rounded-0 flex-grow-0" value="course" :class="{activeLine: info.course}" v-on:click="infoOpen($event)">Joined Courses</button>
-                    <button type="button" class="btn rounded-0 flex-grow-0" value="repo" :class="{activeLine: info.repo}" v-on:click="infoOpen($event)">Repositories</button>
+                <div v-if="info.progress">
+                    <Progress></Progress>
                 </div>
-                <div>
-                    <div v-if="info.progress">
-                        <Progress></Progress>
-                    </div>
-                    <div v-if="info.course">
-                        <profile_courses></profile_courses>
-                    </div>
-                    <div v-if="info.repo">
-                        <repository></repository>
-                    </div>
+                <div v-if="info.course">
+<!--                    <profile_courses></profile_courses>-->
+                </div>
+                <div v-if="info.repo">
+                    <repository></repository>
                 </div>
             </div>
         </div>
@@ -47,18 +45,18 @@
         },
         data() {
             return {
-                user: [],
+                user: {},
                 img: null,
                 permission: '',
-                loggedInUserId: null,
-                time: '',
+                connecting: true,
                 info: {
-                    progress: false,
+                    progress: true,
                     course: false,
-                    repo: true,
+                    repo: false,
                 },
                 previous: 'progress',
                 data : this.$route.query.u_id,
+                test : '',
             }
         },
 
@@ -66,21 +64,17 @@
             /**
              *  gets user data from the UserController and gets if you are the logged in user
              */
-            getUser: function() {
-
-                // Api call to api/user/{id} to get the user data
-                axios.get('api/user/' + this.data)
-                    .then(response => {this.user = response.data;
-                        this.permission = this.getPermission(this.user[0].permission);
-                        this.img = 'img/Profile/' + this.user[0].profile_picture;
-                    });
-
-                // Api call to api/time/{id} to get the users his join date back
-                axios.get('api/time/' + this.data)
-                    .then(response => (this.time = response.data));
-
-                // Stores the user his id in the data
-                this.loggedInUserId = localStorage.getItem('beta.id');
+            getUsers() {
+                this.$http({
+                    url: "users/" + this.data,
+                    method: 'GET',
+                })
+                    .then((res) => {
+                        this.user = res.data.user;
+                        this.permission = this.getPermission(res.data.user.role)
+                    }, () => {
+                        this.has_error = true;
+                    })
             },
 
             infoOpen(e) {
@@ -107,8 +101,15 @@
               }else{ return "administrator";}
             },
         },
+
         mounted() {
-            this.getUser();
+            this.getUsers();
+
+            if (this.$route.query.code !== null){
+                this.info.progress = false;
+                this.info.repo = true;
+                this.previous = 'repo';
+            }
     },
     }
 </script>

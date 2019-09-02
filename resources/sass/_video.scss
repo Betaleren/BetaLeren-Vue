@@ -1,5 +1,9 @@
-#video_box {
-    flex: 0 480 1280px;
+.no_select{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #video_play {
@@ -11,9 +15,8 @@
 }
 
 #video_player {
-    min-width: 480px;
     width: 100%;
-    max-width: 1280px;
+    max-width: 1920px;
     display: block;
     margin: 0 auto;
     background-color: black;

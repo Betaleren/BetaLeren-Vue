@@ -11,14 +11,14 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:200&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-        <link rel="icon" type="image/png" href="img/website/beta.png">
-        <link rel="stylesheet" href="css/app.css">
+        <link rel="icon" type="image/png" href="img/website/beta-white.png">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="{{ asset('js/app.js') }}" defer></script>
         <script>window.Laravel = { crsfToken: '{{ csrf_token()  }}' }</script>
     </head>
     <body>
         <div id="app">
-            <main></main>
+            <index></index>
         </div>
-        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
